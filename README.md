@@ -28,6 +28,8 @@ To get Geralt working on <mark style="color:yellow;">**Android**</mark>, you nee
 
 You can find the source code on [GitHub](https://github.com/samuel-lucas6/Geralt).
 
+As of v3.3.0, this documentation is also [mirrored](https://github.com/samuel-lucas6/geralt-docs) to GitHub.
+
 ## License
 
 Geralt is licensed under the [MIT](https://github.com/samuel-lucas6/Geralt/blob/main/LICENSE) license.
