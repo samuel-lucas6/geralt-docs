@@ -34,6 +34,14 @@ As of v3.3.0, this documentation is also [mirrored](https://github.com/samuel-lu
 
 Geralt is licensed under the [MIT](https://github.com/samuel-lucas6/Geralt/blob/main/LICENSE) license.
 
+## Contact
+
+To report a bug, provide feedback, or ask for a new feature, please raise a [GitHub issue](https://github.com/samuel-lucas6/Geralt/issues/new).
+
+For questions and technical support, please create a [GitHub discussion](https://github.com/samuel-lucas6/Geralt/discussions/new/choose).
+
+Finally, please see the [SECURITY.md](https://github.com/samuel-lucas6/Geralt/blob/main/SECURITY.md) file on GitHub for vulnerability reporting.
+
 ## Goals
 
 * [Span\<T>](https://docs.microsoft.com/en-us/archive/msdn-magazine/2017/connect/csharp-all-about-span-exploring-a-new-net-mainstay) all the things: enables the secure erasure of bytes/chars and boosts performance.
