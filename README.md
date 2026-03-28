@@ -65,7 +65,7 @@ Finally, please see the [SECURITY.md](https://github.com/samuel-lucas6/Geralt/bl
 * Duplicate methods that return byte arrays.
 * Unnecessary 'convenience' functions, like `GenerateKey()` in almost every class.
 * Internal [guarded heap allocations](https://doc.libsodium.org/memory_management#guarded-heap-allocations), which [reduce](https://github.com/ektrah/nsec/issues/52) performance and are unnecessary for very short-lived secrets.
-* Support for [old/no longer supported](https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core) versions of .NET.
+* Support for old/no longer supported versions of [.NET](https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core) and [.NET MAUI](https://dotnet.microsoft.com/en-us/platform/support/policy/maui).
 
 ## Acknowledgements
 
