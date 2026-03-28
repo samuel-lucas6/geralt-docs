@@ -89,21 +89,21 @@ Similarly, do **NOT** access the memory after calling `NoAccess()` or try to wri
 
 `size` is less than 1 or greater than `MaxSize`.
 
-[OutOfMemoryException](https://learn.microsoft.com/en-us/dotnet/api/system.outofmemoryexception)
+[InsufficientMemoryException](https://learn.microsoft.com/en-us/dotnet/api/system.insufficientmemoryexception)
 
-Unable to allocate memory.
-
-[InvalidOperationException](https://learn.microsoft.com/en-us/dotnet/api/system.invalidoperationexception)
-
-Unable to make memory inaccessible.
+Insufficient memory for guarded heap allocation.
 
 [InvalidOperationException](https://learn.microsoft.com/en-us/dotnet/api/system.invalidoperationexception)
 
-Unable to make memory read-only.
+Error marking memory as inaccessible.
 
 [InvalidOperationException](https://learn.microsoft.com/en-us/dotnet/api/system.invalidoperationexception)
 
-Unable to make memory readable and writable.
+Error marking memory as read-only.
+
+[InvalidOperationException](https://learn.microsoft.com/en-us/dotnet/api/system.invalidoperationexception)
+
+Error marking memory as readable and writable.
 
 [ObjectDisposedException](https://learn.microsoft.com/en-us/dotnet/api/system.objectdisposedexception)
 
