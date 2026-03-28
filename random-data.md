@@ -48,7 +48,7 @@ SecureRandom.GetString(int length, string characterSet = AlphanumericChars)
 
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
-`length` is less than `MinStringLength` or greater than `MaxStringLength`.
+`length` is less than `MinStringSize` or greater than `MaxStringSize`.
 
 [ArgumentNullException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentnullexception)
 
@@ -100,14 +100,30 @@ These are used for validation and/or save you defining your own constants.
 public const int SeedSize = 32;
 public const string AlphabeticChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 public const string NumericChars = "0123456789";
-public const string SymbolChars = "!#$%&'()*+,-./:;<=>?@[]^_`{}~";
+public const string SymbolChars = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
 public const string AlphanumericChars = AlphabeticChars + NumericChars;
 public const string AlphanumericSymbolChars = AlphanumericChars + SymbolChars;
 public const int MinUpperBound = 2;
-public const int MinStringLength = 8;
-public const int MaxStringLength = 128;
+public const int MinStringSize = 8;
+public const int MaxStringSize = 128;
+public const int MinCharacterSetSize = MinUpperBound;
+public const int MinLongestWordSize = 1;
+public const int MaxLongestWordSize = 45;
+public const int MinWordlistSize = MinUpperBound;
 public const int MinWordCount = 4;
 public const int MaxWordCount = 20;
+
+public enum LongestWordSize
+{
+    EffLong = 9, // https://www.eff.org/files/2016/07/18/eff_large_wordlist.txt
+    EffShort1 = 5, // https://www.eff.org/files/2016/09/08/eff_short_wordlist_1.txt
+    EffShort2 = 10, // https://www.eff.org/files/2016/09/08/eff_short_wordlist_2_0.txt
+    Bip39 = 8, // https://github.com/bitcoin/bips/blob/master/bip-0039/english.txt
+    Slip39 = 8, // https://github.com/satoshilabs/slips/blob/master/slip-0039/wordlist.txt
+    Monero = 12, // https://github.com/monero-project/monero/blob/master/src/mnemonics/english.h
+    Diceware = 6 // https://theworld.com/~reinhold/diceware.html (both 7776 and 8192 words)
+     // Other wordlists: https://gist.github.com/atoponce/95c4f36f2bc12ec13242a3ccc55023af
+}
 ```
 
 ## Notes
