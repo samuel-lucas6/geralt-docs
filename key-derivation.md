@@ -41,7 +41,7 @@ BLAKE2b.DeriveKey(Span<byte> outputKeyingMaterial, ReadOnlySpan<byte> inputKeyin
 
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
-`personalization` has a length not equal to `PersonalSize`.
+`personalization` has a length not equal to `PersonalizationSize`.
 
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
@@ -58,7 +58,7 @@ These are used for validation and/or save you defining your own constants.
 ```csharp
 public const int KeySize = 32;
 public const int SaltSize = 16;
-public const int PersonalSize = 16;
+public const int PersonalizationSize = 16;
 public const int MinKeySize = 32;
 public const int MaxKeySize = 64;
 ```
