@@ -2,79 +2,93 @@
 
 ## Purpose
 
-The validation methods Geralt uses can be called to avoid ugly if statement validation at the top of functions. This is handy for [custom constructions](https://github.com/samuel-lucas6/kcChaCha20-Poly1305).
+The validation methods that Geralt uses can be called to avoid ugly if statement validation at the top of functions. This is handy for [custom constructions](https://github.com/samuel-lucas6/kcChaCha20-Poly1305).
 
 ## Usage
 
-### EqualToSize
+### EqualTo
 
-Checks that an integer is equal to the valid size.
+Checks that an integer is equal to a required value.
 
 ```csharp
-Validation.EqualToSize(string paramName, int size, int validSize)
+Validation.EqualTo<T>(string paramName, T value, T required) where T : IBinaryInteger<T>
 ```
 
 #### Exceptions
 
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
-`size` is not equal to `validSize`.
+`value` must be equal to `required`.
 
-### SizeBetween
+### BetweenOrEqualTo
 
-Checks that an integer is between the minimum and maximum size.
+Checks that an integer is between a minimum and maximum value (inclusive).
 
 ```csharp
-Validation.SizeBetween(string paramName, int size, int minSize, int maxSize)
+Validation.BetweenOrEqualTo<T>(string paramName, T value, T min, T max) where T : IBinaryInteger<T>)
 ```
 
 #### Exceptions
 
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
-`size` is less than `minSize` or greater than `maxSize`.
+`value` must be between `min` and `max` (inclusive).
 
-### NotLessThanMin
+### GreaterThan
 
-Checks that an integer is not less than the minimum size.
+Checks that an integer is greater than a minimum value.
 
 ```csharp
-Validation.NotLessThanMin(string paramName, int size, int minSize)
+Validation.GreaterThan<T>(string paramName, T value, T min) where T : IBinaryInteger<T>
 ```
 
 #### Exceptions
 
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
-`size` is less than `minSize`.
+`value` must be greater than `min`.
 
-### NotGreaterThanMax
+### GreaterThanOrEqualTo
 
-Checks that an integer is not greater than the maximum size.
+Checks that an integer is greater than or equal to a minimum value.
 
 ```csharp
-Validation.NotGreaterThanMax(string paramName, int size, int maxSize)
+Validation.GreaterThanOrEqualTo<T>(string paramName, T value, T min) where T : IBinaryInteger<T>
 ```
 
 #### Exceptions
 
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
-`size` is greater than `maxSize`.
+`value` must be greater than or equal to `min`.
 
-### MultipleOfSize
+### LessThanOrEqualTo
+
+Checks that an integer is less than or equal to a maximum value.
+
+```csharp
+Validation.LessThanOrEqualTo<T>(string paramName, T value, T max) where T : IBinaryInteger<T>
+```
+
+#### Exceptions
+
+[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
+
+`value` must be less than or equal to `max`.
+
+### MultipleOf
 
 Checks that an integer is a multiple of another integer.
 
 ```csharp
-Validation.MultipleOfSize(string paramName, int size, int multipleOf)
+Validation.MultipleOf<T>(string paramName, T value, T multipleOf) where T : IBinaryInteger<T>
 ```
 
 #### Exceptions
 
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
-`size` is less than or equal to zero or not a multiple of `multipleOf`.
+`value` must be a multiple of `multipleOf` (and not less than or equal to 0).
 
 ### NotEmpty
 
@@ -89,20 +103,6 @@ Validation.NotEmpty(string paramName, int size)
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
 `size` is equal to 0.
-
-### GreaterThanZero
-
-Checks that an integer is not less than or equal to zero.
-
-```csharp
-Validation.GreaterThanZero(string paramName, int size)
-```
-
-#### Exceptions
-
-[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
-
-`size` is less than or equal to 0.
 
 ### NotNull
 
