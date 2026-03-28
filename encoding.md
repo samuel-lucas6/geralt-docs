@@ -89,6 +89,13 @@ Unable to parse the Base64 string.
 ## Constants
 
 ```csharp
+public const string HexCharacterSet = "0123456789ABCDEFabcdef";
+public const string Base64CharacterSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+public const string Base64UrlCharacterSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_=";
+public const string Base64FullCharacterSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/-_=";
+public const string HexIgnoreChars = ":- _./,%;";
+public const string Base64IgnoreChars = " \r\n";
+
 public enum Base64Variant
 {
     Original = 1,
