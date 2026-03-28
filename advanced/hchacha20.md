@@ -36,6 +36,10 @@ HChaCha20.DeriveKey(Span<byte> outputKeyingMaterial, ReadOnlySpan<byte> inputKey
 
 `personalization` has a length greater than 0 but not equal to `PersonalizationSize`.
 
+[ArgumentException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentexception)
+
+`personalization` cannot be all-zero and must have [asymmetry](https://link.springer.com/article/10.1007/s00145-018-9297-9).
+
 ## Constants
 
 These are used for validation and/or save you defining your own constants.
@@ -55,4 +59,8 @@ HChaCha20 is **NOT** a general-purpose hash function. Use [BLAKE2b](../hashing.m
 
 {% hint style="danger" %}
 The input keying material **MUST** be a uniformly random key, **NOT** a password, public key, or X25519 shared secret.
+{% endhint %}
+
+{% hint style="success" %}
+'Asymmetry' for the personalization means the first and last 8 bytes must be different. This is important for [security](https://link.springer.com/article/10.1007/s00145-018-9297-9) (avoiding a fixed-point/weak states).
 {% endhint %}
