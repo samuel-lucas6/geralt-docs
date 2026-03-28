@@ -36,9 +36,7 @@ SecureMemory.ZeroMemory(Span<byte> buffer)
 
 #### Exceptions
 
-[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
-
-`buffer` has a length of 0.
+N/A
 
 ### ZeroMemory
 
@@ -56,9 +54,7 @@ Also, calling this function on a string [converted to a span](https://learn.micr
 
 #### Exceptions
 
-[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
-
-`buffer` has a length of 0.
+N/A
 
 ### LockMemory
 
