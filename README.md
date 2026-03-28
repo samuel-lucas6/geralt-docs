@@ -54,6 +54,7 @@ Finally, please see the [SECURITY.md](https://github.com/samuel-lucas6/Geralt/bl
 * Public constants: easy to create buffers.
 * One algorithm for each task: (X)ChaCha20-Poly1305, BLAKE2b, Argon2id, X25519, and Ed25519.
 * Some low-level functions: useful for [custom](https://github.com/jedisct1/libsodium-xchacha20-siv) [constructions](https://github.com/jedisct1/spake2-ee).
+* Internal secure zeroing: avoids leaving sensitive data in temporary buffers.
 
 ## Out of scope
 
