@@ -21,7 +21,7 @@ Padding should be applied to the plaintext before encryption and removed from th
 Fills a span with padding. This can then be [manually concatenated](advanced/concat.md) with some data.
 
 ```csharp
-Padding.Fill(Span<byte> buffer)
+Iso78164Padding.Fill(Span<byte> buffer)
 ```
 
 #### Exceptions
@@ -30,52 +30,52 @@ Padding.Fill(Span<byte> buffer)
 
 `buffer` has a length of 0.
 
-### GetPaddedLength
+### GetPaddedBufferSize
 
-Returns the required buffer size for `Pad()` based on the unpadded length and a block size (e.g. 16 bytes).
+Returns the required buffer size for `Pad()` based on the unpadded data length and a block size (e.g. 16 bytes).
 
 ```csharp
-Padding.GetPaddedLength(int unpaddedLength, int blockSize)
+Iso78164Padding.GetPaddedBufferSize(ReadOnlySpan<byte> data, int blockSize)
 ```
 
 #### Exceptions
 
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
-`unpaddedLength` is less than 0.
-
-[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
-
 `blockSize` is less than or equal to 0.
 
-[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
+[OverflowException](https://learn.microsoft.com/en-us/dotnet/api/system.overflowexception)
 
-The amount of padding is too large.
+`data.Length + paddingSize` has resulted in an overflow.
 
 ### Pad
 
 Fills a span with the data padded up to the specified block size (e.g. a multiple of 16 bytes).
 
 ```csharp
-Padding.Pad(Span<byte> buffer, ReadOnlySpan<byte> data, int blockSize)
+Iso78164Padding.Pad(Span<byte> buffer, ReadOnlySpan<byte> data, int blockSize)
 ```
 
 #### Exceptions
 
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
-`buffer` has a length not equal to `GetPaddedLength(data.Length, blockSize)`.
+`buffer` has a length not equal to `GetPaddedBufferSize(data, blockSize)`.
 
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
 `blockSize` is less than or equal to 0.
 
-### GetUnpaddedLength
+[CryptographicException](https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.cryptographicexception)
+
+Error padding data.
+
+### GetUnpaddedBufferSize
 
 Returns the number of bytes to slice from the end of the padded data.
 
 ```csharp
-Padding.GetUnpaddedLength(ReadOnlySpan<byte> paddedData, int blockSize)
+Iso78164Padding.GetUnpaddedBufferSize(ReadOnlySpan<byte> paddedData, int blockSize)
 ```
 
 #### Exceptions
@@ -90,7 +90,7 @@ Padding.GetUnpaddedLength(ReadOnlySpan<byte> paddedData, int blockSize)
 
 [FormatException](https://docs.microsoft.com/en-us/dotnet/api/system.formatexception)
 
-Incorrect padding.
+Invalid padding.
 
 ## Notes
 
