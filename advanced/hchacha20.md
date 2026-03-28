@@ -34,7 +34,7 @@ HChaCha20.DeriveKey(Span<byte> outputKeyingMaterial, ReadOnlySpan<byte> inputKey
 
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
-`personalization` has a length greater than 0 but not equal to `PersonalSize`.
+`personalization` has a length greater than 0 but not equal to `PersonalizationSize`.
 
 ## Constants
 
@@ -44,7 +44,7 @@ These are used for validation and/or save you defining your own constants.
 public const int OutputSize = 32;
 public const int KeySize = 32;
 public const int NonceSize = 16;
-public const int PersonalSize = 16;
+public const int PersonalizationSize = 16;
 ```
 
 ## Notes
