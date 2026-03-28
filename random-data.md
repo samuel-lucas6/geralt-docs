@@ -36,27 +36,23 @@ SecureRandom.GetInt32(int upperBound)
 
 `upperBound` is less than `MinUpperBound`.
 
-### GetString
+### GenerateString
 
-Generates a random string of a given length. A custom character set can be provided, but several character sets are available via constants.
+Fills a span with a random string based on the provided character set.
 
 ```csharp
-SecureRandom.GetString(int length, string characterSet = AlphanumericChars)
+SecureRandom.GenerateString(Span<char> buffer, ReadOnlySpan<char> characterSet)
 ```
 
 #### Exceptions
 
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
-`length` is less than `MinStringSize` or greater than `MaxStringSize`.
-
-[ArgumentNullException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentnullexception)
-
-`characterSet` is null.
+`buffer.Length` is less than `MinStringSize` or greater than `MaxStringSize`.
 
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
-`characterSet` has a length of 0.
+`characterSet.Length` is less than `MinCharacterSetSize`.
 
 ### GetPassphrase
 
