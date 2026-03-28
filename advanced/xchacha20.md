@@ -64,9 +64,13 @@ XChaCha20.Encrypt(Span<byte> ciphertext, ReadOnlySpan<byte> plaintext, ReadOnlyS
 
 `key` has a length not equal to `KeySize`.
 
+[OverflowException](https://learn.microsoft.com/en-us/dotnet/api/system.overflowexception)
+
+Counter overflow prevented.
+
 [CryptographicException](https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.cryptographicexception)
 
-Encryption failed.
+Error encrypting plaintext.
 
 ### Decrypt
 
@@ -90,9 +94,13 @@ XChaCha20.Decrypt(Span<byte> plaintext, ReadOnlySpan<byte> ciphertext, ReadOnlyS
 
 `key` has a length not equal to `KeySize`.
 
+[OverflowException](https://learn.microsoft.com/en-us/dotnet/api/system.overflowexception)
+
+Counter overflow prevented.
+
 [CryptographicException](https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.cryptographicexception)
 
-Decryption failed.
+Error decrypting ciphertext.
 
 ## Constants
 
