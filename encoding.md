@@ -20,9 +20,9 @@ Encodings.ToHex(ReadOnlySpan<byte> data)
 
 `data` has a length of 0.
 
-[FormatException](https://docs.microsoft.com/en-us/dotnet/api/system.formatexception)
+[CryptographicException](https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.cryptographicexception)
 
-The data could not be converted to hex. This should never be thrown.
+Error converting bytes to hex.
 
 ### FromHex
 
@@ -60,9 +60,9 @@ Encodings.ToBase64(ReadOnlySpan<byte> data, Base64Variant variant = Base64Varian
 
 `data` has a length of 0.
 
-[FormatException](https://docs.microsoft.com/en-us/dotnet/api/system.formatexception)
+[CryptographicException](https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.cryptographicexception)
 
-The data could not be converted to Base64. This should never be thrown.
+Error converting bytes to Base64.
 
 ### FromBase64
 
