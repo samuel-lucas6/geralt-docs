@@ -9,15 +9,12 @@ Here are several steps you should take as a developer:
 1. Use byte or char arrays over strings. Strings are immutable, meaning they can't reliably be erased and copies may be made. [SecureString](https://learn.microsoft.com/en-gb/dotnet/api/system.security.securestring) is also [not worth using](https://github.com/dotnet/platform-compat/blob/master/docs/DE0001.md).
 2. Use [stackalloc](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/stackalloc) or [GC.AllocateArray()](https://learn.microsoft.com/en-us/dotnet/api/system.gc.allocatearray) with `pinned: true` for allocations. This prevents .NET copying the memory around, allowing proper erasure.
 3. Use [ZeroMemory()](secure-memory.md#zeromemory) to wipe arrays in a way that won't be optimised away by the compiler. This should be done as soon as the array is no longer needed and when an exception occurs. For example, you can call this method in a [try-finally](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/exception-handling-statements) statement.
-4. Use [LockMemory()](secure-memory.md#lockmemory) to try and avoid data swapping to disk.
-5. Use [guarded heap allocations](secure-memory.md#guardedheapallocation), which take care of the above plus limit access to the memory at an operating system level. This protects against buffer overflows/underflows and other processes accessing the data.
-6. Use a library like [memguard](https://github.com/awnumar/memguard) (a Go library, but a C# equivalent is in the works) that [encrypts memory](https://spacetime.dev/encrypting-secrets-in-memory) whilst using guarded heap allocations. This does all of the above whilst protecting against things like [cold boot attacks](https://en.wikipedia.org/wiki/Cold_boot_attack) and [speculative execution vulnerabilities](https://en.wikipedia.org/wiki/Speculative_execution#Security_vulnerabilities).
-7. Support using hardware that stores secrets and performs cryptographic operations on your behalf, like [YubiKeys](https://docs.yubico.com/yesdk/users-manual/getting-started/what-is-a-yubikey.html).
+4. Use [guarded heap allocations](secure-memory.md#guardedheapallocation), which perform memory locking and limit access to the memory at an operating system level. This protects against data being swapped to disk, buffer overflows/underflows, and other processes accessing the data.
+5. Use a library like [memguard](https://github.com/awnumar/memguard) (a Go library, but a C# equivalent may be made) that [encrypts memory](https://spacetime.dev/encrypting-secrets-in-memory) whilst using guarded heap allocations. This does all of the above whilst protecting against things like [cold boot attacks](https://en.wikipedia.org/wiki/Cold_boot_attack) and [speculative execution vulnerabilities](https://en.wikipedia.org/wiki/Speculative_execution#Security_vulnerabilities).
+6. Support using hardware that stores secrets and performs cryptographic operations on your behalf, like [YubiKeys](https://docs.yubico.com/yesdk/users-manual/getting-started/what-is-a-yubikey.html).
 
 {% hint style="success" %}
-Of these, bullets 1, 2, and 3 are most important.
-
-If going the extra mile, bullet 5 should be used instead of bullets 2, 3, and 4.
+The first three bullets are the most important.
 {% endhint %}
 
 ## Usage
@@ -55,54 +52,6 @@ Also, calling this function on a string [converted to a span](https://learn.micr
 #### Exceptions
 
 N/A
-
-### LockMemory
-
-Locks a byte array to try and avoid the contents being swapped to disk.
-
-```csharp
-SecureMemory.LockMemory(ReadOnlySpan<byte> buffer)
-```
-
-{% hint style="warning" %}
-`buffer` **MUST** be [pinned](secure-memory.md#purpose) for this method to work properly.
-
-It is **RECOMMENDED** to use [guarded heap allocations](secure-memory.md#guardedheapallocation) instead, which perform memory locking/unlocking for you.
-{% endhint %}
-
-#### Exceptions
-
-[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
-
-`buffer` has a length that's not a multiple of `PageSize`.
-
-[OutOfMemoryException](https://learn.microsoft.com/en-us/dotnet/api/system.outofmemoryexception)
-
-Unable to lock memory.
-
-### UnlockAndZeroMemory
-
-Overwrites a locked byte array with zeros before unlocking the memory.
-
-```csharp
-SecureMemory.UnlockAndZeroMemory(Span<byte> buffer)
-```
-
-{% hint style="warning" %}
-`buffer` **MUST** be [pinned](secure-memory.md#purpose) for this method to work properly.
-
-It is **RECOMMENDED** to use [guarded heap allocations](secure-memory.md#guardedheapallocation) instead, which perform memory locking/unlocking for you.
-{% endhint %}
-
-#### Exceptions
-
-[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
-
-`buffer` has a length that's not a multiple of `PageSize`.
-
-[InvalidOperationException](https://learn.microsoft.com/en-us/dotnet/api/system.invalidoperationexception)
-
-Unable to unlock memory.
 
 ### GuardedHeapAllocation
 
@@ -165,9 +114,6 @@ The object has been disposed.
 These are used for validation and/or save you defining your own constants.
 
 ```csharp
-// SecureMemory class
-public static readonly int PageSize = Environment.SystemPageSize;
-
 // GuardedHeapAllocation class
 public static readonly int MaxSize = PageSize - 16;
 ```
