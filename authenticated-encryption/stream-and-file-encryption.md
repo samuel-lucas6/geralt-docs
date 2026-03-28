@@ -19,7 +19,7 @@ For file encryption, optimal chunk sizes include 16 KiB, 32 KiB, and 64 KiB. Pic
 Initializes stream encryption or decryption using a key and header. For encryption, the header is filled with a random nonce. It **MUST** be sent/stored before the sequence of ciphertext messages because it is required to decrypt the stream.
 
 ```csharp
-using var secretstream = new IncrementalXChaCha20Poly1305(bool decryption, Span<byte> header, ReadOnlySpan<byte> key)
+using var secretstream = new IncrementalXChaCha20Poly1305(Span<byte> header, ReadOnlySpan<byte> key, bool encryption)
 ```
 
 #### Exceptions
@@ -34,7 +34,7 @@ using var secretstream = new IncrementalXChaCha20Poly1305(bool decryption, Span<
 
 [CryptographicException](https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.cryptographicexception)
 
-Error initializing.
+Error initializing stream encryption/decryption.
 
 ### ChunkFlag
 
@@ -51,12 +51,12 @@ For file encryption, `ChunkFlag.Message` and `ChunkFlag.Final` are the only flag
 During decryption, you **MUST** check that the last chunk had the `ChunkFlag.Final` flag. Otherwise, you **MUST** throw a [CryptographicException](https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.cryptographicexception) to detect stream truncation.
 {% endhint %}
 
-### Push
+### EncryptChunk
 
 Fills a span with the ciphertext chunk computed from a plaintext chunk and optional associated data. `ChunkFlag.Final` **MUST** be specified for the last plaintext chunk.
 
 ```csharp
-secretstream.Push(Span<byte> ciphertextChunk, ReadOnlySpan<byte> plaintextChunk, ReadOnlySpan<byte> associatedData = default, ChunkFlag chunkFlag = ChunkFlag.Message)
+secretstream.EncryptChunk(Span<byte> ciphertextChunk, ReadOnlySpan<byte> plaintextChunk, ReadOnlySpan<byte> associatedData, ChunkFlag chunkFlag = ChunkFlag.Message)
 ```
 
 #### Exceptions
@@ -67,7 +67,7 @@ secretstream.Push(Span<byte> ciphertextChunk, ReadOnlySpan<byte> plaintextChunk,
 
 [InvalidOperationException](https://learn.microsoft.com/en-us/dotnet/api/system.invalidoperationexception)
 
-Cannot push into a decryption stream or push after `ChunkFlag.Final`.
+Cannot encrypt on a decryption stream or after the final chunk without reinitializing.
 
 [ObjectDisposedException](https://learn.microsoft.com/en-us/dotnet/api/system.objectdisposedexception)
 
@@ -75,19 +75,23 @@ The object has been disposed.
 
 [CryptographicException](https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.cryptographicexception)
 
-Encryption failed.
+Error encrypting plaintext chunk.
 
-### Pull
+### DecryptChunk
 
 Verifies that the tag appended to the ciphertext chunk is correct for the given inputs. If verification fails, an exception is thrown. Otherwise, it fills a span with the decrypted ciphertext and returns the decrypted flag for that chunk.
 
 To detect stream truncation, if you reach the end of the stream and `ChunkFlag.Final` was not returned, you **MUST** throw a [CryptographicException](https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.cryptographicexception).
 
 ```csharp
-var chunkFlag = secretstream.Pull(Span<byte> plaintextChunk, ReadOnlySpan<byte> ciphertextChunk, ReadOnlySpan<byte> associatedData = default)
+var chunkFlag = secretstream.DecryptChunk(Span<byte> plaintextChunk, ReadOnlySpan<byte> ciphertextChunk, ReadOnlySpan<byte> associatedData = default)
 ```
 
 #### Exceptions
+
+[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
+
+`ciphertextChunk` has a length less than `TagSize`.
 
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
@@ -95,7 +99,7 @@ var chunkFlag = secretstream.Pull(Span<byte> plaintextChunk, ReadOnlySpan<byte> 
 
 [InvalidOperationException](https://learn.microsoft.com/en-us/dotnet/api/system.invalidoperationexception)
 
-Cannot pull from an encryption stream or pull after `ChunkFlag.Final`.
+Cannot decrypt on an encryption stream or after the final chunk without reinitializing.
 
 [ObjectDisposedException](https://learn.microsoft.com/en-us/dotnet/api/system.objectdisposedexception)
 
@@ -103,7 +107,7 @@ The object has been disposed.
 
 [CryptographicException](https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.cryptographicexception)
 
-Invalid authentication tag for the given inputs.
+Invalid chunk authentication tag for the given inputs.
 
 ### Rekey
 
@@ -117,7 +121,7 @@ secretstream.Rekey()
 
 [InvalidOperationException](https://learn.microsoft.com/en-us/dotnet/api/system.invalidoperationexception)
 
-Cannot rekey after `ChunkFlag.Final`.
+Cannot rekey after the final chunk without reinitializing.
 
 [ObjectDisposedException](https://learn.microsoft.com/en-us/dotnet/api/system.objectdisposedexception)
 
@@ -128,7 +132,7 @@ The object has been disposed.
 Reinitializes stream encryption or decryption using a key and header. This avoids creating another using statement. For encryption, the header is filled with a random nonce. It **MUST** be sent/stored before the sequence of ciphertext messages because it is required to decrypt the stream.
 
 ```csharp
-secretstream.Reinitialize(bool decryption, Span<byte> header, ReadOnlySpan<byte> key)
+secretstream.Reinitialize(Span<byte> header, ReadOnlySpan<byte> key, bool encryption)
 ```
 
 #### Exceptions
@@ -147,7 +151,7 @@ The object has been disposed.
 
 [CryptographicException](https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.cryptographicexception)
 
-Error reinitializing.
+Error initializing stream encryption/decryption.
 
 ## Constants
 
