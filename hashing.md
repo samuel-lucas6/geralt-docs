@@ -36,32 +36,6 @@ BLAKE2b.ComputeHash(Span<byte> hash, ReadOnlySpan<byte> message)
 
 The hash could not be computed.
 
-### ComputeHash
-
-Fills a span with a hash computed from a Stream message. This is useful for hashing files.
-
-```csharp
-BLAKE2b.ComputeHash(Span<byte> hash, Stream message)
-```
-
-#### Exceptions
-
-[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
-
-`hash` has a length less than `MinHashSize` or greater than `MaxHashSize`.
-
-[ArgumentNullException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentnullexception)
-
-`message` is null.
-
-[InvalidOperationException](https://learn.microsoft.com/en-us/dotnet/api/system.invalidoperationexception)
-
-`message` cannot be read.
-
-[CryptographicException](https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.cryptographicexception)
-
-The hash could not be computed.
-
 ### IncrementalBLAKE2b
 
 Provides support for computing a hash from several messages.
