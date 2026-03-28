@@ -132,11 +132,10 @@ These are used for validation and/or save you defining your own constants.
 ```csharp
 public const int KeySize = 32;
 public const int SaltSize = 16;
+public const int HashSize = 128;
 public const int MinKeySize = 16;
 public const int MinIterations = 1;
 public const int MinMemorySize = 8192;
-public const int MinHashSize = 93;
-public const int MaxHashSize = 128;
 ```
 
 ## Notes
