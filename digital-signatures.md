@@ -64,12 +64,12 @@ Ed25519.GenerateKeyPair(Span<byte> publicKey, Span<byte> privateKey, ReadOnlySpa
 
 Unable to generate key pair from seed.
 
-### ComputePublicKey
+### GetPublicKey
 
-Fills a span with the public key computed from a private key.
+Fills a span with the public key retrieved from a private key.
 
 ```csharp
-Ed25519.ComputePublicKey(Span<byte> publicKey, ReadOnlySpan<byte> privateKey)
+Ed25519.GetPublicKey(Span<byte> publicKey, ReadOnlySpan<byte> privateKey)
 ```
 
 #### Exceptions
@@ -84,7 +84,7 @@ Ed25519.ComputePublicKey(Span<byte> publicKey, ReadOnlySpan<byte> privateKey)
 
 [CryptographicException](https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.cryptographicexception)
 
-Unable to compute public key from private key.
+Error retrieving public key from private key.
 
 ### Sign
 
