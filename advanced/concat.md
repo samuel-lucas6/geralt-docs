@@ -33,13 +33,9 @@ Spans.Concat(Span<byte> buffer, ReadOnlySpan<byte> a, ReadOnlySpan<byte> b)
 
 `buffer` has a length not equal to `a.Length + b.Length`.
 
-[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
+[OverflowException](https://learn.microsoft.com/en-us/dotnet/api/system.overflowexception)
 
-`a` has a length not equal to `buffer.Length - b.Length`.
-
-[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
-
-`b` has a length not equal to `buffer.Length - a.Length`.
+`a.Length + b.Length` has resulted in an overflow.
 
 ### Concat
 
@@ -55,17 +51,9 @@ Spans.Concat(Span<byte> buffer, ReadOnlySpan<byte> a, ReadOnlySpan<byte> b, Read
 
 `buffer` has a length not equal to `a.Length + b.Length + c.Length`.
 
-[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
+[OverflowException](https://learn.microsoft.com/en-us/dotnet/api/system.overflowexception)
 
-`a` has a length not equal to `buffer.Length - b.Length - c.Length`.
-
-[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
-
-`b` has a length not equal to `buffer.Length - a.Length - c.Length`.
-
-[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
-
-`c` has a length not equal to `buffer.Length - a.Length - b.Length`.
+`a.Length + b.Length + c.Length` has resulted in an overflow.
 
 ### Concat
 
@@ -81,21 +69,9 @@ Spans.Concat(Span<byte> buffer, ReadOnlySpan<byte> a, ReadOnlySpan<byte> b, Read
 
 `buffer` has a length not equal to `a.Length + b.Length + c.Length + d.Length`.
 
-[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
+[OverflowException](https://learn.microsoft.com/en-us/dotnet/api/system.overflowexception)
 
-`a` has a length not equal to `buffer.Length - b.Length - c.Length - d.Length`.
-
-[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
-
-`b` has a length not equal to `buffer.Length - a.Length - c.Length - d.Length`.
-
-[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
-
-`c` has a length not equal to `buffer.Length - a.Length - b.Length - d.Length`.
-
-[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
-
-`d` has a length not equal to `buffer.Length - a.Length - b.Length - c.Length`.
+`a.Length + b.Length + c.Length + d.Length` has resulted in an overflow.
 
 ### Concat
 
@@ -111,25 +87,9 @@ Spans.Concat(Span<byte> buffer, ReadOnlySpan<byte> a, ReadOnlySpan<byte> b, Read
 
 `buffer` has a length not equal to `a.Length + b.Length + c.Length + d.Length + e.Length`.
 
-[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
+[OverflowException](https://learn.microsoft.com/en-us/dotnet/api/system.overflowexception)
 
-`a` has a length not equal to `buffer.Length - b.Length - c.Length - d.Length - e.Length`.
-
-[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
-
-`b` has a length not equal to `buffer.Length - a.Length - c.Length - d.Length - e.Length`.
-
-[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
-
-`c` has a length not equal to `buffer.Length - a.Length - b.Length - d.Length - e.Length`.
-
-[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
-
-`d` has a length not equal to `buffer.Length - a.Length - b.Length - c.Length - e.Length`.
-
-[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
-
-`e` has a length not equal to `buffer.Length - a.Length - b.Length - c.Length - d.Length`.
+`a.Length + b.Length + c.Length + d.Length + e.Length` has resulted in an overflow.
 
 ### Concat
 
@@ -145,29 +105,9 @@ Spans.Concat(Span<byte> buffer, ReadOnlySpan<byte> a, ReadOnlySpan<byte> b, Read
 
 `buffer` has a length not equal to `a.Length + b.Length + c.Length + d.Length + e.Length + f.Length`.
 
-[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
+[OverflowException](https://learn.microsoft.com/en-us/dotnet/api/system.overflowexception)
 
-`a` has a length not equal to `buffer.Length - b.Length - c.Length - d.Length - e.Length - f.Length`.
-
-[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
-
-`b` has a length not equal to `buffer.Length - a.Length - c.Length - d.Length - e.Length - f.Length`.
-
-[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
-
-`c` has a length not equal to `buffer.Length - a.Length - b.Length - d.Length - e.Length - f.Length`.
-
-[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
-
-`d` has a length not equal to `buffer.Length - a.Length - b.Length - c.Length - e.Length - f.Length`.
-
-[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
-
-`e` has a length not equal to `buffer.Length - a.Length - b.Length - c.Length - d.Length - f.Length`.
-
-[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
-
-`f` has a length not equal to `buffer.Length - a.Length - b.Length - c.Length - d.Length - e.Length`.
+`a.Length + b.Length + c.Length + d.Length + e.Length + f.Length` has resulted in an overflow.
 
 ## Notes
 
