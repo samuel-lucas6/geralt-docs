@@ -6,12 +6,12 @@ It can be useful to convert bytes to strings. For example, to represent [hashes]
 
 ## Usage
 
-### ToHex
+### GetToHexBufferSize
 
-Returns the hexadecimal string that represents the data.
+Returns the output buffer size required for `ToHex()`.
 
 ```csharp
-Encodings.ToHex(ReadOnlySpan<byte> data)
+Encodings.GetToHexBufferSize(ReadOnlySpan<byte> data)
 ```
 
 #### Exceptions
@@ -20,41 +20,107 @@ Encodings.ToHex(ReadOnlySpan<byte> data)
 
 `data` has a length of 0.
 
+[OverflowException](https://learn.microsoft.com/en-us/dotnet/api/system.overflowexception)
+
+`data.Length * 2` has resulted in an overflow.
+
+### ToHex
+
+Fills a span with the hexadecimal string that represents the provided data.
+
+```csharp
+Encodings.ToHex(Span<char> hex, ReadOnlySpan<byte> data)
+```
+
+#### Exceptions
+
+[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
+
+`hex` has a length not equal to `GetToHexBufferSize()`.
+
+[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
+
+`data` has a length of 0.
+
+[OverflowException](https://learn.microsoft.com/en-us/dotnet/api/system.overflowexception)
+
+`data.Length * 2` has resulted in an overflow.
+
 [CryptographicException](https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.cryptographicexception)
 
 Error converting bytes to hex.
 
-### FromHex
+### GetFromHexBufferSize
 
-Returns a byte array from a hexadecimal string. Common separator characters are ignored by default. `ignoreChars` can be `null` to disallow any non-hexadecimal characters.
+Returns the output buffer size required for `FromHex()`.
 
 ```csharp
-Encodings.FromHex(string hex, string ignoreChars = ":- ")
+Encodings.GetFromHexBufferSize(ReadOnlySpan<char> hex, ReadOnlySpan<char> ignoreChars = default)
 ```
 
 #### Exceptions
-
-[ArgumentNullException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentnullexception)
-
-`hex` is null.
 
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
-`hex` has a length of 0.
+`hex` has a length of 0 or is not a multiple of 2 (after discounting ignored chars).
 
-[FormatException](https://docs.microsoft.com/en-us/dotnet/api/system.formatexception)
+[ArgumentException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentexception)
 
-Unable to parse the hex string.
+`ignoreChars` cannot contain hex characters or represent the only characters in `hex`.
 
-### ToBase64
+### FromHex
 
-Returns the Base64 string representing the data. Choose one variant (e.g. Base64URL for file names/URLs) and only ever use that variant.
+Fills a span with the data from decoding a hexadecimal string. Separator characters to ignore when parsing can optionally be provided.
 
 ```csharp
-Encodings.ToBase64(ReadOnlySpan<byte> data, Base64Variant variant = Base64Variant.Original)
+Encodings.FromHex(Span<byte> data, ReadOnlySpan<char> hex, ReadOnlySpan<char> ignoreChars = default)
 ```
 
 #### Exceptions
+
+[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
+
+`data` has a length not equal to `GetFromHexBufferSize()`.
+
+[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
+
+`hex` has a length of 0 or is not a multiple of 2 (after discounting ignored chars).
+
+[ArgumentException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentexception)
+
+`ignoreChars` cannot contain hex characters or represent the only characters in `hex`.
+
+[FormatException](https://docs.microsoft.com/en-us/dotnet/api/system.formatexception)
+
+Invalid hex string.
+
+### GetToBase64BufferSize
+
+Returns the output buffer size required for `ToBase64()`.
+
+```csharp
+Encodings.GetToBase64BufferSize(ReadOnlySpan<byte> data, Base64Variant variant = Base64Variant.Original)
+```
+
+#### Exceptions
+
+[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
+
+`data` has a length of 0.
+
+### ToBase64
+
+Fills a span with the Base64 string that represents the provided data. Choose one variant (e.g. Base64URL for file names/URLs) and only ever use that variant.
+
+```csharp
+Encodings.ToBase64(Span<char> base64, ReadOnlySpan<byte> data, Base64Variant variant = Base64Variant.Original)
+```
+
+#### Exceptions
+
+[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
+
+`base64` has a length not equal to `GetToBase64BufferSize()`.
 
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
@@ -64,27 +130,57 @@ Encodings.ToBase64(ReadOnlySpan<byte> data, Base64Variant variant = Base64Varian
 
 Error converting bytes to Base64.
 
-### FromBase64
+### GetFromBase64BufferSize
 
-Returns a byte array from a Base64 string. The variant must match the one used for encoding. `ignoreChars` can be `null` to disallow any non-Base64 characters.
+Returns the output buffer size required for `FromBase64()`.
 
 ```csharp
-Encodings.FromBase64(string base64, Base64Variant variant = Base64Variant.Original, string ignoreChars = " ")
+Encodings.GetFromBase64BufferSize(ReadOnlySpan<char> base64, Base64Variant variant = Base64Variant.Original, ReadOnlySpan<char> ignoreChars = default)
 ```
 
 #### Exceptions
 
-[ArgumentNullException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentnullexception)
+[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
-`base64` is null.
+`base64` has a length of 0 or is not a valid length based on `variant`.
+
+[ArgumentException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentexception)
+
+`ignoreChars` cannot contain Base64 characters or represent the only characters in `base64`.
+
+[OverflowException](https://learn.microsoft.com/en-us/dotnet/api/system.overflowexception)
+
+The buffer size computation has resulted in an overflow.
+
+### FromBase64
+
+Fills a span with the data from decoding a Base64 string. The variant must match the one used for encoding. Separator characters to ignore when parsing can optionally be provided.
+
+```csharp
+Encodings.FromBase64(Span<byte> data, ReadOnlySpan<char> base64, Base64Variant variant = Base64Variant.Original, ReadOnlySpan<char> ignoreChars = default)
+```
+
+#### Exceptions
 
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
-`base64` has a length of 0.
+`data` has a length not equal to `GetFromBase64BufferSize()`.
+
+[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
+
+`base64` has a length of 0 or is not a valid length based on `variant`.
+
+[ArgumentException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentexception)
+
+`ignoreChars` cannot contain Base64 characters or represent the only characters in `base64`.
+
+[OverflowException](https://learn.microsoft.com/en-us/dotnet/api/system.overflowexception)
+
+The buffer size computation has resulted in an overflow.
 
 [FormatException](https://docs.microsoft.com/en-us/dotnet/api/system.formatexception)
 
-Unable to parse the Base64 string.
+Invalid Base64 string.
 
 ## Constants
 
