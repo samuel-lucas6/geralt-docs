@@ -84,6 +84,8 @@ Returns the required buffer size for `GeneratePassphrase()`. The length of the l
 SecureRandom.GetPassphraseBufferSize(int longestWord, int wordCount)
 ```
 
+#### Exceptions
+
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
 `longestWord` must be greater than or equal to `MinLongestWordSize` and less than or equal to `MaxLongestWordSize`.
@@ -103,6 +105,8 @@ SecureRandom.GeneratePassphrase(Span<char> buffer, out int passphraseSize, int w
 {% hint style="danger" %}
 `buffer` must be sliced using `passphraseSize` to remove padding.
 {% endhint %}
+
+#### Exceptions
 
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
@@ -128,6 +132,12 @@ SecureRandom.GeneratePassphrase(Span<char> buffer, out int passphraseSize, ReadO
 `buffer` must be sliced using `passphraseSize` to remove padding.
 {% endhint %}
 
+{% hint style="success" %}
+View the source code for `GetWordlist()` to see how to format a custom wordlist. It is recommended to stick to English wordlists because this is what has been tested.
+{% endhint %}
+
+#### Exceptions
+
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
 `buffer.Length` is not equal to `GetPassphraseBufferSize()`.
@@ -151,6 +161,18 @@ SecureRandom.GeneratePassphrase(Span<char> buffer, out int passphraseSize, ReadO
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
 The longest word in the wordlist must be greater than or equal to `MinLongestWordSize` and less than or equal to `MaxLongestWordSize`.
+
+### GetWordlist
+
+Returns the built-in [EFF long wordlist](https://www.eff.org/files/2016/07/18/eff_large_wordlist.txt) (minus hyphenated words) formatted correctly for `GeneratePassphrase()`.
+
+```csharp
+SecureRandom.GetWordlist()
+```
+
+#### Exceptions
+
+N/A
 
 ## Constants
 
