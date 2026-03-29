@@ -136,6 +136,7 @@ public const int MinTagSize = 16;
 public const int MaxTagSize = 64;
 public const int MinKeySize = 16;
 public const int MaxKeySize = 64;
+public const int BlockSize = 128;
 ```
 
 ## Notes
