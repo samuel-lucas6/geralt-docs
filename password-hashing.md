@@ -17,6 +17,15 @@
 See the [Notes](password-hashing.md#notes) for some example parameters.
 {% endhint %}
 
+{% hint style="warning" %}
+The same Unicode character can sometimes get encoded in multiple different ways depending on things like the OS/keyboard/device, which can prevent a user deriving the correct key/password hash every time. There are two solutions to this problem:
+
+1. Only accept [ASCII](https://en.wikipedia.org/wiki/ASCII#Character_set) characters in passwords.
+2. If non-ASCII characters are accepted in passwords, apply [Unicode Normalization Form C (NFC)](https://learn.microsoft.com/en-us/dotnet/api/system.string.normalize) to the password before password hashing. This is recommended by [NIST SP 800-63B-4](https://csrc.nist.gov/pubs/sp/800/63/b/4/final) and [RFC 8265](https://www.rfc-editor.org/rfc/rfc8265.html).
+
+However, note that 2 does not actually fix this problem. There are still [rare cases](https://1passwordstatic.com/files/security/1password-white-paper.pdf) where Unicode characters can be problematic. Normalization also requires having a string copy of the password in memory, which is bad for secure erasure.
+{% endhint %}
+
 ## Usage
 
 ### DeriveKey
