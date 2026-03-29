@@ -101,6 +101,9 @@ These are used for validation and/or save you defining your own constants.
 public const int HashSize = 32;
 public const int MinHashSize = 16;
 public const int MaxHashSize = 64;
+public const int BlockSize = 128;
+public const int SaltSize = 16;
+public const int PersonalizationSize = 16;
 ```
 
 ## Notes
