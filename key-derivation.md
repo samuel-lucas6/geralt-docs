@@ -16,7 +16,7 @@ BLAKE2b is **NOT** suitable for deriving keys from passwords. Use [Argon2id](pas
 {% endhint %}
 
 {% hint style="success" %}
-256-bit keys are recommended. Larger keys are unnecessary.
+256-bit keys are recommended. Larger keys are unnecessary unless splitting the output in two (e.g. keys for different directions) or doing a symmetric ratchet (the state size should be [double](https://eprint.iacr.org/2024/220) the security level).
 {% endhint %}
 
 ## Usage
