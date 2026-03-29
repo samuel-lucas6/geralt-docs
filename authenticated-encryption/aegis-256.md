@@ -93,7 +93,7 @@ If you intend to feed **multiple, variable-length** inputs into the associated d
 {% endhint %}
 
 {% hint style="danger" %}
-The key **MUST** be uniformly random. It can either be [randomly generated](../random-data.md#fill) or the output of a [KDF](../key-derivation.md). Furthermore, it **SHOULD** be rotated periodically (e.g. a different key per file).
+The key **MUST** be uniformly random. It can either be [randomly generated](../random-data.md#fill) or the output of a [KDF](../key-derivation.md). Furthermore, it **SHOULD** be rotated periodically (e.g., a different key per file).
 {% endhint %}
 
 {% hint style="warning" %}
@@ -130,7 +130,7 @@ Without hardware support, (X)ChaCha20-Poly1305 is faster, and the AEGIS-256 impl
 {% endhint %}
 
 {% hint style="success" %}
-AEGIS-256 can be used as a [MAC](../message-authentication.md) by encrypting with the message as the associated data and an empty plaintext, resulting in just a tag. However, it **MUST NOT** be used as a hash function (e.g. without a secret key or for key derivation).
+AEGIS-256 can be used as a [MAC](../message-authentication.md) by encrypting with the message as the associated data and an empty plaintext, resulting in just a tag. However, it **MUST NOT** be used as a hash function (e.g., without a secret key or for key derivation).
 {% endhint %}
 
 {% hint style="info" %}

@@ -4,9 +4,9 @@
 
 It is generally difficult to share a symmetric key with another party because it needs to remain secret. Fortunately, a sender and recipient can exchange public keys, which do not need to be secret.
 
-Both parties can then compute the same shared secret using their private key and the other party's public key. This shared secret can be turned into a symmetric key (e.g. for [encryption](authenticated-encryption/xchacha20-poly1305.md)).
+Both parties can then compute the same shared secret using their private key and the other party's public key. This shared secret can be turned into a symmetric key (e.g., for [encryption](authenticated-encryption/xchacha20-poly1305.md)).
 
-For [post-quantum security](https://www.bsi.bund.de/SharedDocs/Downloads/EN/BSI/Publications/Brochure/quantum-safe-cryptography.html?nn=433196), a pre-shared key can also be shared between the two parties via a **secure** (e.g. **encrypted**) channel.
+For [post-quantum security](https://www.bsi.bund.de/SharedDocs/Downloads/EN/BSI/Publications/Brochure/quantum-safe-cryptography.html?nn=433196), a pre-shared key can also be shared between the two parties via a **secure** (e.g., **encrypted**) channel.
 
 {% hint style="danger" %}
 Private keys **MUST** **NOT** be shared. They **MUST** remain secret.
@@ -227,7 +227,7 @@ Do **NOT** use the same seed for [X25519](key-exchange.md#generatekeypair-1) and
 
 ### Non-Interactive Patterns
 
-These are one-way patterns, so no back and forth between the sender and recipient is required. They are appropriate for offline applications (e.g. a file encryption program).
+These are one-way patterns, so no back and forth between the sender and recipient is required. They are appropriate for offline applications (e.g., a file encryption program).
 
 #### Authenticated Key Exchange
 

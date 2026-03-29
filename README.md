@@ -58,11 +58,11 @@ Finally, please see the [SECURITY.md](https://github.com/samuel-lucas6/Geralt/bl
 
 ## Out of scope
 
-* Full misuse resistance (e.g. no nonces or optional nonces). This can limit the user, doesn't work well with spans, and overcomplicates code.
-* Solving the key reuse problem (e.g. a [mandatory context](https://youtu.be/1NVgRPb0tHU) for everything or [wrappers](https://nsec.rocks/docs/api/nsec.cryptography.key) instead of raw bytes). I'm [not](https://github.com/ektrah/nsec/issues/31) convinced either tactic works, and it again adds complexity.
+* Full misuse resistance (e.g., no nonces or optional nonces). This can limit the user, doesn't work well with spans, and overcomplicates code.
+* Solving the key reuse problem (e.g., a [mandatory context](https://youtu.be/1NVgRPb0tHU) for everything or [wrappers](https://nsec.rocks/docs/api/nsec.cryptography.key) instead of raw bytes). I'm [not](https://github.com/ektrah/nsec/issues/31) convinced either tactic works, and it again adds complexity.
 * Old [NaCl](https://nacl.cr.yp.to/) APIs, such as `crypto_box`. These [shouldn't](https://github.com/jedisct1/libsodium/issues/586) be used.
-* Other primitives unless they solve a problem. AES-GCM causes problems (e.g. it [requires](https://doc.libsodium.org/secret-key_cryptography/aead/aes-256-gcm#limitations) hardware support). [AEGIS](https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-aegis-aead) solves problems (e.g. it's [key committing](https://eprint.iacr.org/2022/268) and supports random nonces whilst being [faster](https://eprint.iacr.org/2023/523)/[stronger](https://competitions.cr.yp.to/round3/aegisv11.pdf) than AES-GCM).
-* Experimental ideas/custom constructions (e.g. anything without an RFC or Internet-Draft), which can go in a [separate project](https://github.com/samuel-lucas6/Daence.NET).
+* Other primitives unless they solve a problem. AES-GCM causes problems (e.g., it [requires](https://doc.libsodium.org/secret-key_cryptography/aead/aes-256-gcm#limitations) hardware support). [AEGIS](https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-aegis-aead) solves problems (e.g., it's [key committing](https://eprint.iacr.org/2022/268) and supports random nonces whilst being [faster](https://eprint.iacr.org/2023/523)/[stronger](https://competitions.cr.yp.to/round3/aegisv11.pdf) than AES-GCM).
+* Experimental ideas/custom constructions (e.g., anything without an RFC or Internet-Draft), which can go in a [separate project](https://github.com/samuel-lucas6/Daence.NET).
 * Duplicate methods that return byte arrays.
 * Unnecessary 'convenience' functions, like `GenerateKey()` in almost every class.
 * Internal [guarded heap allocations](https://doc.libsodium.org/memory_management#guarded-heap-allocations), which [reduce](https://github.com/ektrah/nsec/issues/52) performance and are unnecessary for very short-lived secrets.

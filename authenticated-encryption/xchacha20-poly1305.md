@@ -91,7 +91,7 @@ If you intend to feed **multiple variable-length** inputs into the associated da
 {% endhint %}
 
 {% hint style="danger" %}
-The key **MUST** be uniformly random. It can either be [randomly generated](../random-data.md#fill) or the output of a [KDF](../key-derivation.md). Furthermore, it **SHOULD** be rotated periodically (e.g. a different key per file).
+The key **MUST** be uniformly random. It can either be [randomly generated](../random-data.md#fill) or the output of a [KDF](../key-derivation.md). Furthermore, it **SHOULD** be rotated periodically (e.g., a different key per file).
 {% endhint %}
 
 {% hint style="warning" %}

@@ -9,7 +9,7 @@ For example, an AEAD ciphertext is usually a ciphertext concatenated with a tag.
 {% hint style="danger" %}
 Concatenation is often not as simple as it sounds. You **MUST** be careful to avoid [canonicalization attacks](https://soatok.blog/2021/07/30/canonicalization-attacks-against-macs-and-signatures/).
 
-This is important for [hashing](../hashing.md), [message authentication](../message-authentication.md) (e.g. [Encrypt-then-MAC](https://samuellucas.com/draft-lucas-generalised-committing-aead/draft-lucas-generalised-committing-aead.html#section-3)), associated data in [AEADs](../authenticated-encryption/), and info in [key derivation](../key-derivation.md).
+This is important for [hashing](../hashing.md), [message authentication](../message-authentication.md) (e.g., [Encrypt-then-MAC](https://samuellucas.com/draft-lucas-generalised-committing-aead/draft-lucas-generalised-committing-aead.html#section-3)), associated data in [AEADs](../authenticated-encryption/), and info in [key derivation](../key-derivation.md).
 
 Two solutions are:
 

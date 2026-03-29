@@ -32,7 +32,7 @@ Iso78164Padding.Fill(Span<byte> buffer)
 
 ### GetPaddedBufferSize
 
-Returns the required buffer size for `Pad()` based on the unpadded data length and a block size (e.g. 16 bytes).
+Returns the required buffer size for `Pad()` based on the unpadded data length and a block size (e.g., 16 bytes).
 
 ```csharp
 Iso78164Padding.GetPaddedBufferSize(ReadOnlySpan<byte> data, int blockSize)
@@ -50,7 +50,7 @@ Iso78164Padding.GetPaddedBufferSize(ReadOnlySpan<byte> data, int blockSize)
 
 ### Pad
 
-Fills a span with the data padded up to the specified block size (e.g. a multiple of 16 bytes).
+Fills a span with the data padded up to the specified block size (e.g., a multiple of 16 bytes).
 
 ```csharp
 Iso78164Padding.Pad(Span<byte> buffer, ReadOnlySpan<byte> data, int blockSize)

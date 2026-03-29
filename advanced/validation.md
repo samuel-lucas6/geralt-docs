@@ -120,7 +120,7 @@ Validation.MultipleOf<T>(string paramName, T value, T multipleOf) where T : IBin
 
 ### NotEmpty
 
-Checks that an integer (e.g. the length of a span) is not equal to zero.
+Checks that an integer (e.g., the length of a span) is not equal to zero.
 
 ```csharp
 Validation.NotEmpty<T>(string paramName, T size) where T : IBinaryInteger<T>

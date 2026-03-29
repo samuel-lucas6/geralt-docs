@@ -110,7 +110,7 @@ Encodings.GetToBase64BufferSize(ReadOnlySpan<byte> data, Base64Variant variant =
 
 ### ToBase64
 
-Fills a span with the Base64 string that represents the provided data. Choose one variant (e.g. Base64URL for file names/URLs) and only ever use that variant.
+Fills a span with the Base64 string that represents the provided data. Choose one variant (e.g., Base64URL for file names/URLs) and only ever use that variant.
 
 ```csharp
 Encodings.ToBase64(Span<char> base64, ReadOnlySpan<byte> data, Base64Variant variant = Base64Variant.Original)
@@ -204,7 +204,7 @@ public enum Base64Variant
 ## Notes
 
 {% hint style="danger" %}
-Do **NOT** support multiple variants of Base64 in your application (e.g. Base64 with and without padding). This can lead to [vulnerabilities](https://cendyne.dev/posts/2022-02-18-user-provided-primary-keys.html).
+Do **NOT** support multiple variants of Base64 in your application (e.g., Base64 with and without padding). This can lead to [vulnerabilities](https://cendyne.dev/posts/2022-02-18-user-provided-primary-keys.html).
 {% endhint %}
 
 {% hint style="success" %}

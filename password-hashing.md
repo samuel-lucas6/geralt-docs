@@ -11,7 +11,7 @@
 
 {% hint style="success" %}
 1. Set the iteration count to 3.
-2. Set the memory size as high as possible (minimum of 64 MiB) for a reasonable delay (e.g. 100 ms to 1 sec) on the type of device your application will run on.
+2. Set the memory size as high as possible (minimum of 64 MiB) for a reasonable delay (e.g., 100 ms to 1 sec) on the type of device your application will run on.
 3. If the delay is lower than you would like, increase the iterations.
 
 See the [Notes](password-hashing.md#notes) for some example parameters.
@@ -147,9 +147,9 @@ The best defence against password cracking will always be to use strong password
 {% hint style="success" %}
 Here are some recommended delays based on scenario:
 
-* Interactive (e.g. online login): 50-250 ms
-* Semi-interactive (e.g. file encryption): 250-1000 ms
-* Non-interactive (e.g. disk encryption): 1000-5000 ms
+* Interactive (e.g., online login): 50-250 ms
+* Semi-interactive (e.g., file encryption): 250-1000 ms
+* Non-interactive (e.g., disk encryption): 1000-5000 ms
 {% endhint %}
 
 Here are some example parameters for different scenarios:

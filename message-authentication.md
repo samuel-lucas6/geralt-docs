@@ -158,7 +158,7 @@ The key **MUST** be uniformly random. It should be the output of a [KDF](key-der
 {% endhint %}
 
 {% hint style="danger" %}
-Do **NOT** use the same key for multiple purposes (e.g. encryption and authentication). You should [derive](key-derivation.md) separate keys using the same input keying material and personalisation but different salts and/or info.
+Do **NOT** use the same key for multiple purposes (e.g., encryption and authentication). You should [derive](key-derivation.md) separate keys using the same input keying material and personalisation but different salts and/or info.
 {% endhint %}
 
 {% hint style="success" %}
@@ -166,9 +166,9 @@ The same key can be reused for multiple messages, but it is good practice to [de
 {% endhint %}
 
 {% hint style="success" %}
-If you are making multiple calls to `IncrementalBLAKE2b` with unchanging/static data at the beginning (e.g. the same key), you can cache the state to improve performance. This allows you to only process this data once and can help you quickly zero the key from memory.
+If you are making multiple calls to `IncrementalBLAKE2b` with unchanging/static data at the beginning (e.g., the same key), you can cache the state to improve performance. This allows you to only process this data once and can help you quickly zero the key from memory.
 {% endhint %}
 
 {% hint style="info" %}
-The security level of BLAKE2b against a generic attack on hash-based MACs is 1/2 the output length (e.g. 128-bit security for a 256-bit tag).​ However, the security level is equal to the output length for typical attacks against MACs (e.g. 256-bit security for a 256-bit tag). Both types of attacks are completely impractical.
+The security level of BLAKE2b against a generic attack on hash-based MACs is 1/2 the output length (e.g., 128-bit security for a 256-bit tag).​ However, the security level is equal to the output length for typical attacks against MACs (e.g., 256-bit security for a 256-bit tag). Both types of attacks are completely impractical.
 {% endhint %}

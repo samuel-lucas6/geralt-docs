@@ -7,7 +7,7 @@
 The 32-bit internal counter can be changed from the default of 0 to 1 for constructing [ChaCha20-Poly1305](https://datatracker.ietf.org/doc/html/rfc8439). Otherwise, it should generally be left alone.
 
 {% hint style="warning" %}
-You probably want [ChaCha20-Poly1305](../authenticated-encryption/chacha20-poly1305.md) instead, which also ensures a message has not been tampered with. This class **MUST** only be used for custom constructions (e.g. [Encrypt-then-MAC](https://samuellucas.com/draft-lucas-generalised-committing-aead/draft-lucas-generalised-committing-aead.html#section-3)).
+You probably want [ChaCha20-Poly1305](../authenticated-encryption/chacha20-poly1305.md) instead, which also ensures a message has not been tampered with. This class **MUST** only be used for custom constructions (e.g., [Encrypt-then-MAC](https://samuellucas.com/draft-lucas-generalised-committing-aead/draft-lucas-generalised-committing-aead.html#section-3)).
 {% endhint %}
 
 {% hint style="danger" %}
@@ -119,7 +119,7 @@ This is **NOT** an authenticated encryption algorithm. This class **MUST** only 
 {% endhint %}
 
 {% hint style="danger" %}
-The key **MUST** be uniformly random. It can either be [randomly generated](../random-data.md#fill) or the output of a [KDF](../key-derivation.md). Furthermore, it **SHOULD** be rotated periodically (e.g. a different key per file).
+The key **MUST** be uniformly random. It can either be [randomly generated](../random-data.md#fill) or the output of a [KDF](../key-derivation.md). Furthermore, it **SHOULD** be rotated periodically (e.g., a different key per file).
 {% endhint %}
 
 {% hint style="warning" %}

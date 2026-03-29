@@ -31,7 +31,7 @@ SecureRandom.FillDeterministic(Span<byte> buffer, ReadOnlySpan<byte> seed)
 ```
 
 {% hint style="warning" %}
-This should be reserved for tests and custom constructions (e.g. an [XOF](https://github.com/jedisct1/libsodium/issues/623)).
+This should be reserved for tests and custom constructions (e.g., an [XOF](https://github.com/jedisct1/libsodium/issues/623)).
 {% endhint %}
 
 #### Exceptions

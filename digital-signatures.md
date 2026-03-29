@@ -215,7 +215,7 @@ public const int SeedSize = 32;
 ## Notes
 
 {% hint style="info" %}
-If you want to use [BLAKE2b](hashing.md#incrementalblake2b) for prehashing instead of Ed25519ph, which uses SHA-512 internally, you can hash a domain separation constant (e.g. the protocol name) concatenated with the message and sign the 512-bit hash.
+If you want to use [BLAKE2b](hashing.md#incrementalblake2b) for prehashing instead of Ed25519ph, which uses SHA-512 internally, you can hash a domain separation constant (e.g., the protocol name) concatenated with the message and sign the 512-bit hash.
 {% endhint %}
 
 {% hint style="danger" %}
@@ -223,7 +223,7 @@ If you want to support prehashing as well as non-prehashed Ed25519 like in [Kryp
 {% endhint %}
 
 {% hint style="warning" %}
-Ed25519 is vulnerable to [fault attacks](https://eprint.iacr.org/2017/1014.pdf). Techniques like causing [voltage glitches](https://cybermashup.files.wordpress.com/2017/10/practical-fault-attack-against-eddsa_fdtc-2017.pdf) on a chip (e.g. on an Arduino) can be used to recover the secret key and create valid signatures.
+Ed25519 is vulnerable to [fault attacks](https://eprint.iacr.org/2017/1014.pdf). Techniques like causing [voltage glitches](https://cybermashup.files.wordpress.com/2017/10/practical-fault-attack-against-eddsa_fdtc-2017.pdf) on a chip (e.g., on an Arduino) can be used to recover the secret key and create valid signatures.
 
 This should generally not concern you as it's mostly relevant for embedded devices and requires physical or remote access to the device. Furthermore, most countermeasures are ineffective. Prehashing or [hedged signatures](https://soatok.blog/2020/05/03/hedged-signatures-with-libsodium-using-dhole/) can help but will not prevent all attacks.
 {% endhint %}

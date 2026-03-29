@@ -8,7 +8,7 @@ This hash acts as a fingerprint for the data. Hashes can be used to uniquely ide
 
 It is also possible to personalize the output for your application/a specific use case via a constant and to randomize hashing by using a salt. The former provides domain separation, helping to avoid collisions between applications/use cases. The latter can also be used for this purpose but is primarily designed for digital signature schemes.
 
-However, **unkeyed** hashes do not provide [authentication](message-authentication.md) (e.g. for [Encrypt-then-MAC](https://samuellucas.com/draft-lucas-generalised-committing-aead/draft-lucas-generalised-committing-aead.html#section-3)). Furthermore, they should be avoided for [key derivation](key-derivation.md). Use the linked APIs instead.
+However, **unkeyed** hashes do not provide [authentication](message-authentication.md) (e.g., for [Encrypt-then-MAC](https://samuellucas.com/draft-lucas-generalised-committing-aead/draft-lucas-generalised-committing-aead.html#section-3)). Furthermore, they should be avoided for [key derivation](key-derivation.md). Use the linked APIs instead.
 
 {% hint style="danger" %}
 BLAKE2b is **NOT** suitable for hashing passwords. Use [Argon2id](password-hashing.md) instead.
@@ -162,7 +162,7 @@ Do **NOT** manually truncate a hash. Instead, specify the hash size you want dir
 {% endhint %}
 
 {% hint style="success" %}
-Unlike older hash functions (e.g. MD5, SHA-1, SHA-256, and SHA-512), BLAKE2b is immune to [length extension attacks](https://en.wikipedia.org/wiki/Length_extension_attack).
+Unlike older hash functions (e.g., MD5, SHA-1, SHA-256, and SHA-512), BLAKE2b is immune to [length extension attacks](https://en.wikipedia.org/wiki/Length_extension_attack).
 {% endhint %}
 
 {% hint style="success" %}
@@ -170,5 +170,5 @@ If you are making multiple calls to `IncrementalBLAKE2b` with unchanging/static 
 {% endhint %}
 
 {% hint style="info" %}
-The security level of BLAKE2b is 1/2 the output length (e.g. 128-bit security for a 256-bit hash).​
+The security level of BLAKE2b is 1/2 the output length (e.g., 128-bit security for a 256-bit hash).​
 {% endhint %}
