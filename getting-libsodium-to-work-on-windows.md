@@ -4,13 +4,13 @@ hidden: true
 
 # Getting libsodium to work on Windows
 
-libsodium requires the [Visual C++ Redistributable for Visual Studio 2015-2022](https://learn.microsoft.com/en-US/cpp/windows/latest-supported-vc-redist?view=msvc-170) on Windows. This dependency is included in the .NET SDK. When publishing software, there are three ways to deal with this:
+libsodium requires the [latest Microsoft Visual C++ Redistributable](https://learn.microsoft.com/en-US/cpp/windows/latest-supported-vc-redist?view=msvc-170) on Windows. This dependency is included in the .NET SDK. When publishing software, there are three ways to deal with this:
 
 1. Install this as part of your application setup/as a [package manager dependency](https://docs.chocolatey.org/en-us/create/package-dependencies/).
 2. Ask the user to manually install this.
 3. Bundle the `vcruntime140.dll` file with your executable.
 
-If you want your program to be portable (e.g. [self-contained](https://docs.microsoft.com/en-us/dotnet/core/deploying/#publish-self-contained)), you have to take the third approach. This can be done using the following steps:
+If you want your program to be portable (e.g. [self-contained](https://learn.microsoft.com/en-us/dotnet/core/deploying/?pivots=visualstudio#self-contained-deployment)), you have to take the third approach. This can be done using the following steps:
 
 1. Download the `VisualCppRedist_AIO_x86_x64.exe` file from the [latest release](https://github.com/abbodi1406/vcredist/releases) of [this](https://github.com/abbodi1406/vcredist) GitHub repo.
 2. Use [7-Zip](https://www.7-zip.org/) to extract the downloaded executable (e.g. right click, hover over 7-Zip, and click Extract to "VisualCppRedist\_AIO\_x86\_x64\\").
