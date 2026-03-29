@@ -90,10 +90,10 @@ Unable to compute public key from private key.
 
 ### DeriveSenderSharedKey
 
-Fills a span with the shared key **for the sender** using their private key, a recipient public key, and an optional pre-shared key.
+Fills a span with the shared key **for the sender** using their private key, a recipient public key, an optional personalization constant, and an optional pre-shared key.
 
 ```csharp
-X25519.DeriveSenderSharedKey(Span<byte> sharedKey, ReadOnlySpan<byte> senderPrivateKey, ReadOnlySpan<byte> recipientPublicKey, ReadOnlySpan<byte> preSharedKey = default)
+X25519.DeriveSenderSharedKey(Span<byte> sharedKey, ReadOnlySpan<byte> senderPrivateKey, ReadOnlySpan<byte> recipientPublicKey, ReadOnlySpan<byte> personalization = default, ReadOnlySpan<byte> preSharedKey = default)
 ```
 
 #### Exceptions
@@ -112,6 +112,10 @@ X25519.DeriveSenderSharedKey(Span<byte> sharedKey, ReadOnlySpan<byte> senderPriv
 
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
+If specified, `personalization` has a length not equal to `PersonalizationSize`.
+
+[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
+
 If specified, `preSharedKey` has a length less than `MinPreSharedKeySize` or greater than `MaxPreSharedKeySize`.
 
 [CryptographicException](https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.cryptographicexception)
@@ -120,10 +124,10 @@ Invalid recipient public key or unable to compute hash.
 
 ### DeriveRecipientSharedKey
 
-Fills a span with the shared key **for the recipient** using their private key, the sender's public key, and an optional pre-shared key.
+Fills a span with the shared key **for the recipient** using their private key, the sender's public key, an optional personalization constant, and an optional pre-shared key. The personalization and pre-shared key must match `DeriveSenderSharedKey()`.
 
 ```csharp
-X25519.DeriveRecipientSharedKey(Span<byte> sharedKey, ReadOnlySpan<byte> recipientPrivateKey, ReadOnlySpan<byte> senderPublicKey, ReadOnlySpan<byte> preSharedKey = default)
+X25519.DeriveRecipientSharedKey(Span<byte> sharedKey, ReadOnlySpan<byte> recipientPrivateKey, ReadOnlySpan<byte> senderPublicKey, ReadOnlySpan<byte> personalization = default, ReadOnlySpan<byte> preSharedKey = default)
 ```
 
 #### Exceptions
@@ -139,6 +143,10 @@ X25519.DeriveRecipientSharedKey(Span<byte> sharedKey, ReadOnlySpan<byte> recipie
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
 `senderPublicKey` has a length not equal to `PublicKeySize`.
+
+[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
+
+If specified, `personalization` has a length not equal to `PersonalizationSize`.
 
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
@@ -160,7 +168,7 @@ X25519.ComputeSharedSecret(Span<byte> sharedSecret, ReadOnlySpan<byte> senderPri
 1. The number of possible keys is limited to the group size (\~2^252), which is smaller than the key space.
 2. Many (public key, private key) pairs produce the same shared secret. This can lead to [vulnerabilities](https://datatracker.ietf.org/doc/html/rfc7748#section-7).
 
-Therefore, it is important to pass the shared secret [concatenated](advanced/concat.md) with the sender's public key and recipient's public key through a [KDF](key-derivation.md).
+Therefore, it is important to pass the shared secret [concatenated](advanced/concat.md) with the sender's public key and recipient's public key through a [KDF](key-derivation.md). This is what `DeriveSenderSharedKey()` and `DeriveRecipientSharedKey()` do for you.
 {% endhint %}
 
 #### Exceptions
