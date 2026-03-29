@@ -6,6 +6,8 @@
 
 This hash acts as a fingerprint for the data. Hashes can be used to uniquely identify messages, detect corruption, detect duplicate data, and index data in a hash table.
 
+It is also possible to personalize the output for your application/a specific use case via a constant and to randomize hashing by using a salt. The former provides domain separation, helping to avoid collisions between applications/use cases. The latter can also be used for this purpose but is primarily designed for digital signature schemes.
+
 However, **unkeyed** hashes do not provide [authentication](message-authentication.md) (e.g. for [Encrypt-then-MAC](https://samuellucas.com/draft-lucas-generalised-committing-aead/draft-lucas-generalised-committing-aead.html#section-3)). Furthermore, they should be avoided for [key derivation](key-derivation.md). Use the linked APIs instead.
 
 {% hint style="danger" %}
@@ -34,7 +36,37 @@ BLAKE2b.ComputeHash(Span<byte> hash, ReadOnlySpan<byte> message)
 
 [CryptographicException](https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.cryptographicexception)
 
-The hash could not be computed.
+Error computing hash.
+
+### ComputeHash
+
+Fills a span with a personalized and/or salted hash computed from a message.
+
+```csharp
+BLAKE2b.ComputeHash(Span<byte> hash, ReadOnlySpan<byte> message, ReadOnlySpan<byte> personalization, ReadOnlySpan<byte> salt = default)
+```
+
+#### Exceptions
+
+[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
+
+`hash` has a length less than `MinHashSize` or greater than `MaxHashSize`.
+
+[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
+
+`personalization` and `salt` both have a length of 0.
+
+[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
+
+`personalization` has a length greater than 0 but not equal to `PersonalizationSize`.
+
+[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
+
+`salt` has a length greater than 0 but not equal to `SaltSize`.
+
+[CryptographicException](https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.cryptographicexception)
+
+Error computing personalized/salted hash.
 
 ### IncrementalBLAKE2b
 
@@ -57,6 +89,11 @@ blake2b.Finalize(Span<byte> hash2);
 blake2b.RestoreCachedState();
 // hash3 == hash2
 blake2b.Finalize(Span<byte> hash3);
+
+// Compute a personalized and/or salted hash
+using var blake2b = new IncrementalBLAKE2b(int hashSize, key: ReadOnlySpan<byte>.Empty, ReadOnlySpan<byte> personalization, ReadOnlySpan<byte> salt = default);
+blake2b.Update(ReadOnlySpan<byte> message4);
+blake2b.Finalize(Span<byte> hash4);
 ```
 
 {% hint style="warning" %}
@@ -71,11 +108,19 @@ blake2b.Finalize(Span<byte> hash3);
 
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
+`personalization` has a length greater than 0 but not equal to `PersonalizationSize`.
+
+[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
+
+`salt` has a length greater than 0 but not equal to `SaltSize`.
+
+[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
+
 `hash` has a length not equal to `hashSize`.
 
 [CryptographicException](https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.cryptographicexception)
 
-The hash could not be computed.
+Error initializing/updating/finalizing hash function state.
 
 [InvalidOperationException](https://learn.microsoft.com/en-us/dotnet/api/system.invalidoperationexception)
 
