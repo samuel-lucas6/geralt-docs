@@ -20,6 +20,20 @@ Validation.EqualTo<T>(string paramName, T value, T required) where T : IBinaryIn
 
 `value` must be equal to `required`.
 
+### Between
+
+Checks that an integer is between a minimum and maximum value (exclusive).
+
+```csharp
+Validation.Between<T>(string paramName, T value, T min, T max) where T : IBinaryInteger<T>
+```
+
+#### Exceptions
+
+[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
+
+`value` must be between `min` and `max` (exclusive).
+
 ### BetweenOrEqualTo
 
 Checks that an integer is between a minimum and maximum value (inclusive).
@@ -62,6 +76,20 @@ Validation.GreaterThanOrEqualTo<T>(string paramName, T value, T min) where T : I
 
 `value` must be greater than or equal to `min`.
 
+### LessThan
+
+Checks that an integer is less than a maximum value.
+
+```csharp
+Validation.LessThan<T>(string paramName, T value, T max) where T : IBinaryInteger<T>
+```
+
+#### Exceptions
+
+[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
+
+`value` must be less than `max`.
+
 ### LessThanOrEqualTo
 
 Checks that an integer is less than or equal to a maximum value.
@@ -92,46 +120,126 @@ Validation.MultipleOf<T>(string paramName, T value, T multipleOf) where T : IBin
 
 ### NotEmpty
 
-Checks that the length of a span is not equal to zero.
+Checks that an integer (e.g. the length of a span) is not equal to zero.
 
 ```csharp
-Validation.NotEmpty(string paramName, int size)
+Validation.NotEmpty<T>(string paramName, T size) where T : IBinaryInteger<T>
 ```
 
 #### Exceptions
 
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
-`size` is equal to 0.
+`size` must not be equal to 0.
 
 ### NotNull
 
-Checks that an array is not null.
+Checks that a parameter is not null.
 
 ```csharp
-Validation.NotNull<T>(string paramName, T value)
+Validation.NotNull<T>(string paramName, T? value)
 ```
 
 #### Exceptions
 
 [ArgumentNullException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentnullexception)
 
-`value` is null.
+`value` must not be null.
 
 ### NotNullOrEmpty
 
-Checks that a string is not null or empty.
+Checks that an enumerable (e.g., array) is not null or empty.
 
 ```csharp
-Validation.NotNullOrEmpty(string paramName, string value)
+Validation.NotNullOrEmpty<T>(string paramName, IEnumerable<T?> enumerable)
 ```
 
 #### Exceptions
 
 [ArgumentNullException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentnullexception)
 
-`value` is null.
+`enumerable` must not be null.
 
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
-`value` has a length of 0.
+`enumerable` must not be empty.
+
+### HasNoNullValues
+
+Checks that an enumerable (e.g., array) is not null and has no null values.
+
+```csharp
+Validation.HasNoNullValues<T>(string paramName, IEnumerable<T?> enumerable)
+```
+
+#### Exceptions
+
+[ArgumentNullException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentnullexception)
+
+`enumerable` must not be null.
+
+[ArgumentException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentexception)
+
+`enumerable` must not contain any null values.
+
+### HasNoNullOrEmptyValues
+
+Checks that an enumerable (e.g., string array) is not null/empty and has no null/empty values.
+
+```csharp
+Validation.HasNoNullOrEmptyValues<T>(string paramName, IEnumerable<T?> enumerable)
+```
+
+#### Exceptions
+
+[ArgumentNullException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentnullexception)
+
+`enumerable` must not be null.
+
+[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
+
+`enumerable` must not be empty.
+
+[ArgumentException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentexception)
+
+`enumerable` must not contain any null or empty values.
+
+### HasNoNullValues
+
+Checks that a jagged enumerable (e.g., jagged array) is not null and has no null values.
+
+```csharp
+Validation.HasNoNullValues<T>(string paramName, IEnumerable<T[]?> jaggedEnumerable)
+```
+
+#### Exceptions
+
+[ArgumentNullException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentnullexception)
+
+`jaggedEnumerable` must not be null.
+
+[ArgumentException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentexception)
+
+`jaggedEnumerable` must not contain any null collections/values.
+
+### HasNoNullOrEmptyValues
+
+Checks that a jagged enumerable (e.g., jagged string array) is not null/empty and has no null/empty values.
+
+```csharp
+Validation.HasNoNullOrEmptyValues<T>(string paramName, IEnumerable<T[]?> jaggedEnumerable)
+```
+
+#### Exceptions
+
+[ArgumentNullException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentnullexception)
+
+`jaggedEnumerable` must not be null.
+
+[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
+
+`jaggedEnumerable` must not be empty.
+
+[ArgumentException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentexception)
+
+`jaggedEnumerable` must not contain any null or empty collections/values.
