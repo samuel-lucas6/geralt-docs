@@ -191,7 +191,10 @@ public const int PrivateKeySize = 32;
 public const int SeedSize = 32;
 public const int SharedSecretSize = 32;
 public const int SharedKeySize = 32;
+public const int PersonalizationSize = 16;
 public const int PreSharedKeySize = 32;
+public const int MinSharedKeySize = 16;
+public const int MaxSharedKeySize = 64;
 public const int MinPreSharedKeySize = 16;
 public const int MaxPreSharedKeySize = 64;
 ```
