@@ -13,10 +13,10 @@ Geralt is available as a [NuGet](https://www.nuget.org/packages/Geralt) package.
 
 | Windows     | Linux            | macOS       | Other         |
 | ----------- | ---------------- | ----------- | ------------- |
-| `win-x64`   | `linux-x64`      | `osx-x64`   | `ios-arm64`   |
+| `win-x64`   | `linux-x64`      | `osx-x64`   | `ios`         |
 | `win-x86`   | `linux-musl-x64` | `osx-arm64` | `tvos`        |
 | `win-arm64` | `linux-arm64`    |             | `maccatalyst` |
-|             | `linux-arm`      |             |               |
+|             | `linux-arm`      |             | `android`     |
 
 [Stable releases](https://doc.libsodium.org/doc/quickstart#what-is-the-difference-between-point-releases-and-stable-releases) of the [libsodium NuGet package](https://www.nuget.org/packages/libsodium/) are supported without Geralt being updated, whereas point releases require Geralt to be updated.
 
