@@ -100,7 +100,7 @@ X25519.DeriveSenderSharedKey(Span<byte> sharedKey, ReadOnlySpan<byte> senderPriv
 
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
-`sharedKey` has a length not equal to `SharedKeySize`.
+`sharedKey` has a length less than `MinSharedKeySize` or greater than `MaxSharedKeySize`.
 
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
@@ -130,7 +130,7 @@ X25519.DeriveRecipientSharedKey(Span<byte> sharedKey, ReadOnlySpan<byte> recipie
 
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
-`sharedKey` has a length not equal to `SharedKeySize`.
+`sharedKey` has a length less than `MinSharedKeySize` or greater than `MaxSharedKeySize`.
 
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
