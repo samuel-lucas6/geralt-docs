@@ -61,6 +61,7 @@ public const int SaltSize = 16;
 public const int PersonalizationSize = 16;
 public const int MinKeySize = 32;
 public const int MaxKeySize = 64;
+public const int BlockSize = 128;
 ```
 
 ## Notes
