@@ -21,9 +21,9 @@ Geralt is available as a [NuGet](https://www.nuget.org/packages/Geralt) package.
 [Stable releases](https://doc.libsodium.org/doc/quickstart#what-is-the-difference-between-point-releases-and-stable-releases) of the [libsodium NuGet package](https://www.nuget.org/packages/libsodium/) are supported without Geralt being updated, whereas point releases require Geralt to be updated.
 
 {% hint style="info" %}
-Note that libsodium requires the [Visual C++ Redistributable for Visual Studio 2015-2022](https://learn.microsoft.com/en-US/cpp/windows/latest-supported-vc-redist?view=msvc-170) on <mark style="color:yellow;">**Windows**</mark>. Instructions on how to deal with this can be found [here](getting-libsodium-to-work-on-windows.md).
+Note that libsodium requires the [latest Microsoft Visual C++ Redistributable](https://learn.microsoft.com/en-US/cpp/windows/latest-supported-vc-redist?view=msvc-170) on <mark style="color:yellow;">**Windows**</mark>. Instructions on how to deal with this can be found [here](getting-libsodium-to-work-on-windows.md).
 
-To get Geralt working on <mark style="color:yellow;">**Android**</mark>, you need to [build the libsodium binaries yourself](https://doc.libsodium.org/installation#cross-compiling-to-android) because they aren't included in the libsodium NuGet package. You then need to [modify](https://github.com/ektrah/nsec/issues/81) the project slightly to target that platform.
+The platforms in the `Other` column have not been tested and require [.NET MAUI](https://dotnet.microsoft.com/en-us/apps/maui).
 {% endhint %}
 
 ## Source code
