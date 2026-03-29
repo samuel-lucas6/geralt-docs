@@ -86,6 +86,28 @@ Ed25519.GetPublicKey(Span<byte> publicKey, ReadOnlySpan<byte> privateKey)
 
 Error retrieving public key from private key.
 
+### GetSeed
+
+Fills a span with the seed retrieved from a private key.
+
+```csharp
+Ed25519.GetSeed(Span<byte> seed, ReadOnlySpan<byte> privateKey)
+```
+
+#### Exceptions
+
+[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
+
+`seed` has a length not equal to `SeedSize`.
+
+[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
+
+`privateKey` has a length not equal to `PrivateKeySize`.
+
+[CryptographicException](https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.cryptographicexception)
+
+Error retrieving seed from private key.
+
 ### Sign
 
 Fills a span with the signature for a message signed using a private key.
