@@ -139,11 +139,11 @@ Memory locking is not guaranteed with guarded heap allocations. For example, it 
 {% endhint %}
 
 {% hint style="success" %}
-It is **RECOMMENDED** to use a separate guarded heap allocation for each secret. This is less error prone whilst offering greater protection and access control.
+It is **RECOMMENDED** to use a separate guarded heap allocation for each secret. This is less error-prone whilst offering greater protection and access control.
 {% endhint %}
 
 {% hint style="success" %}
-As well as taking these steps as a developer, you can recommend users of your application do the following:
+As well as taking these steps as a developer, you can recommend that users of your application do the following:
 
 * Limit the number of installed/running applications on their machine.
 * Harden their machine against malware (e.g., allowlisting, a local firewall, etc).
