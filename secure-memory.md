@@ -7,8 +7,8 @@ If an attacker can retrieve sensitive data, like keys, passwords, and plaintexts
 Here are several steps you should take as a developer:
 
 1. Use byte or char arrays over strings. Strings are immutable, meaning they can't reliably be erased and copies may be made. [SecureString](https://learn.microsoft.com/en-gb/dotnet/api/system.security.securestring) is also [not worth using](https://github.com/dotnet/platform-compat/blob/master/docs/DE0001.md).
-2. Use [stackalloc](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/stackalloc) or [GC.AllocateArray()](https://learn.microsoft.com/en-us/dotnet/api/system.gc.allocatearray) with `pinned: true` for allocations. This prevents .NET copying the memory around, allowing proper erasure.
-3. Use [ZeroMemory()](secure-memory.md#zeromemory) to wipe arrays in a way that won't be optimised away by the compiler. This should be done as soon as the array is no longer needed and when an exception occurs. For example, you can call this method in a [try-finally](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/exception-handling-statements) statement.
+2. Use [stackalloc](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/stackalloc) or [GC.AllocateArray\<T>()](https://learn.microsoft.com/en-us/dotnet/api/system.gc.allocatearray) with `pinned: true` for allocations. This prevents .NET from copying the memory around, allowing proper erasure.
+3. Use [ZeroMemory()](secure-memory.md#zeromemory) to wipe arrays in a manner that won't be optimised away by the compiler. This should be done as soon as the array is no longer needed and when an exception occurs. For example, you can call this method in a [try-finally](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/exception-handling-statements) statement.
 4. Use [guarded heap allocations](secure-memory.md#guardedheapallocation), which perform memory locking and limit access to the memory at an operating system level. This protects against data being swapped to disk, buffer overflows/underflows, and other processes accessing the data.
 5. Use a library like [memguard](https://github.com/awnumar/memguard) (a Go library, but a C# equivalent may be made) that [encrypts memory](https://spacetime.dev/encrypting-secrets-in-memory) whilst using guarded heap allocations. This does all of the above whilst protecting against things like [cold boot attacks](https://en.wikipedia.org/wiki/Cold_boot_attack) and [speculative execution vulnerabilities](https://en.wikipedia.org/wiki/Speculative_execution#Security_vulnerabilities).
 6. Support using hardware that stores secrets and performs cryptographic operations on your behalf, like [YubiKeys](https://docs.yubico.com/yesdk/users-manual/getting-started/what-is-a-yubikey.html).
@@ -24,7 +24,7 @@ The first three bullets are the most important.
 Overwrites a byte array with zeros.
 
 ```csharp
-SecureMemory.ZeroMemory(Span<byte> buffer)
+SecureMemory.ZeroMemory(Span<byte> buffer);
 ```
 
 {% hint style="warning" %}
@@ -40,7 +40,7 @@ N/A
 Overwrites a char array or string with zeros.
 
 ```csharp
-SecureMemory.ZeroMemory(ReadOnlySpan<char> buffer)
+SecureMemory.ZeroMemory(ReadOnlySpan<char> buffer);
 ```
 
 {% hint style="warning" %}
@@ -111,11 +111,11 @@ The object has been disposed.
 
 ## Constants
 
-These are used for validation and/or save you defining your own constants.
+These are used for validation and/or save you from defining your own constants.
 
 ```csharp
 // GuardedHeapAllocation class
-public static readonly int MaxSize = PageSize - 16;
+public static readonly int MaxSize = Environment.SystemPageSize - 16;
 ```
 
 ## Notes
@@ -146,7 +146,7 @@ It is **RECOMMENDED** to use a separate guarded heap allocation for each secret.
 As well as taking these steps as a developer, you can recommend users of your application do the following:
 
 * Limit the number of installed/running applications on their machine.
-* Harden their machine against malware.
+* Harden their machine against malware (e.g., allowlisting, a local firewall, etc).
 * Encrypt their OS drive.
 * Disable hibernation.
 * Disable memory dumps.
@@ -154,9 +154,9 @@ As well as taking these steps as a developer, you can recommend users of your ap
 {% endhint %}
 
 {% hint style="info" %}
-Memory locking uses [VirtualLock](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtuallock) on Windows and [mlock](https://linux.die.net/man/2/mlock) with [madvise](https://linux.die.net/man/2/madvise) and `MADV_DONTDUMP` on Unix.
+Memory locking uses [VirtualLock()](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtuallock) on Windows and [mlock()](https://linux.die.net/man/2/mlock) with [madvise()](https://linux.die.net/man/2/madvise) and `MADV_DONTDUMP` on Unix.
 
-Guarded heap allocations require 3 or 4 extra pages of memory over a typical allocation. Allocations are done with [VirtualAlloc](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualalloc) on Windows and [mmap](https://linux.die.net/man/2/mmap) with `MAP_NOCORE` or [posix\_memalign](https://linux.die.net/man/3/posix_memalign) on Unix. [VirtualProtect](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualprotect) on Windows and [mprotect](https://linux.die.net/man/2/mprotect) on Unix are used for the memory access restrictions.
+Guarded heap allocations require 3 or 4 extra pages of memory over a typical allocation. Allocations are done with [VirtualAlloc()](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualalloc) on Windows and [mmap()](https://linux.die.net/man/2/mmap) with `MAP_NOCORE` or [posix\_memalign()](https://linux.die.net/man/3/posix_memalign) on Unix. [VirtualProtect()](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualprotect) on Windows and [mprotect()](https://linux.die.net/man/2/mprotect) on Unix are used for the memory access restrictions.
 
 The protection on Unix is [likely superior](https://github.com/awnumar/memguard/issues/123) to on Windows.
 {% endhint %}
