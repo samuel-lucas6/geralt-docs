@@ -180,7 +180,7 @@ N/A
 
 ## Constants
 
-These are used for validation and/or save you defining your own constants.
+These are used for validation and/or save you from defining your own constants.
 
 ```csharp
 public const int SeedSize = 32;
@@ -218,9 +218,9 @@ If the non-deterministic functions are called inside a virtual machine (VM) that
 {% endhint %}
 
 {% hint style="success" %}
-For random strings (e.g., passwords), the number of combinations is the length of the character set to the power of the number of characters. For example, `52^8` for an 8 character password with uppercase/lowercase English letters.
+For random strings (e.g., passwords), the number of combinations is equal to the length of the character set raised to the power of the number of characters. For example, `52^8` for an 8-character password with uppercase/lowercase English letters.
 
-For random passphrases, the number of combinations is the length of the wordlist to the power of the number of words. For example, `7776^6` for a 6 word passphrase generated using a wordlist containing 7776 words.
+For random passphrases, the number of combinations is equal to the length of the wordlist raised to the power of the number of words. For example, `7776^6` for a 6-word passphrase generated using a wordlist containing 7776 words.
 
 In both cases, the entropy (in bits) is approximately `log2()` of the above. For instance, `log2(7776^6)` = 77.6 bits.
 
@@ -228,5 +228,5 @@ An acceptable minimum for passwords/passphrases is \~80 bits of entropy.
 {% endhint %}
 
 {% hint style="info" %}
-The libsodium library uses `RtlGenRandom()` on Windows and `getrandom` or `/dev/urandom` on Linux and macOS to generate cryptographically secure random numbers non-deterministically. Deterministic generation is done using the IETF version of [ChaCha20](https://datatracker.ietf.org/doc/html/rfc8439#section-2.4) with a hardcoded nonce.
+The libsodium library uses `RtlGenRandom()` on Windows and `getrandom` or `/dev/urandom` on Linux and macOS to generate cryptographically secure, non-deterministic random numbers. Deterministic generation is done using the IETF version of [ChaCha20](https://datatracker.ietf.org/doc/html/rfc8439#section-2.4) with a hardcoded nonce.
 {% endhint %}
