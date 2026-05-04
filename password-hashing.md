@@ -106,6 +106,14 @@ Argon2id.VerifyHash(ReadOnlySpan<char> hash, ReadOnlySpan<byte> password)
 
 [FormatException](https://docs.microsoft.com/en-us/dotnet/api/system.formatexception)
 
+Invalid password hash string encoding.
+
+[FormatException](https://docs.microsoft.com/en-us/dotnet/api/system.formatexception)
+
+Invalid password hash string termination.
+
+[FormatException](https://docs.microsoft.com/en-us/dotnet/api/system.formatexception)
+
 Invalid password hash string prefix.
 
 ### NeedsRehash
@@ -132,7 +140,15 @@ Argon2id.NeedsRehash(ReadOnlySpan<char> hash, int iterations, int memorySize)
 
 [FormatException](https://docs.microsoft.com/en-us/dotnet/api/system.formatexception)
 
-Invalid password hash string or string prefix.
+Invalid password hash string encoding.
+
+[FormatException](https://docs.microsoft.com/en-us/dotnet/api/system.formatexception)
+
+Invalid password hash string termination.
+
+[FormatException](https://docs.microsoft.com/en-us/dotnet/api/system.formatexception)
+
+Invalid password hash string prefix.
 
 ## Constants
 
