@@ -108,6 +108,10 @@ Encodings.GetToBase64BufferSize(ReadOnlySpan<byte> data, Base64Variant variant =
 
 `data` has a length of 0.
 
+[OverflowException](https://learn.microsoft.com/en-us/dotnet/api/system.overflowexception)
+
+The encoded length is too large for an array.
+
 ### ToBase64
 
 Fills a span with the Base64 string that represents the provided data. Choose one variant (e.g., Base64URL for file names/URLs) and only ever use that variant.
