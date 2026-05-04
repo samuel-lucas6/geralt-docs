@@ -66,6 +66,10 @@ Encodings.GetFromHexBufferSize(ReadOnlySpan<char> hex, ReadOnlySpan<char> ignore
 
 [ArgumentException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentexception)
 
+`hex` cannot contain non-ASCII characters.
+
+[ArgumentException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentexception)
+
 `ignoreChars` cannot contain hex characters or represent the only characters in `hex`.
 
 ### FromHex
@@ -85,6 +89,10 @@ Encodings.FromHex(Span<byte> data, ReadOnlySpan<char> hex, ReadOnlySpan<char> ig
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
 `hex` has a length of 0 or is not a multiple of 2 (after discounting ignored chars).
+
+[ArgumentException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentexception)
+
+`hex` cannot contain non-ASCII characters.
 
 [ArgumentException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentexception)
 
@@ -150,6 +158,10 @@ Encodings.GetFromBase64BufferSize(ReadOnlySpan<char> base64, Base64Variant varia
 
 [ArgumentException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentexception)
 
+`base64` cannot contain non-ASCII characters.
+
+[ArgumentException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentexception)
+
 `ignoreChars` cannot contain Base64 characters or represent the only characters in `base64`.
 
 [OverflowException](https://learn.microsoft.com/en-us/dotnet/api/system.overflowexception)
@@ -173,6 +185,10 @@ Encodings.FromBase64(Span<byte> data, ReadOnlySpan<char> base64, Base64Variant v
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
 `base64` has a length of 0 or is not a valid length based on `variant`.
+
+[ArgumentException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentexception)
+
+`base64` cannot contain non-ASCII characters.
 
 [ArgumentException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentexception)
 
