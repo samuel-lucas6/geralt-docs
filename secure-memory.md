@@ -83,6 +83,10 @@ Do **NOT** assign the `AsSpan()` return value to a span variable. <mark style="c
 Similarly, do **NOT** access the memory after calling `NoAccess()` or try to write to the memory after calling `ReadOnly()`. <mark style="color:yellow;">This will immediately crash your application</mark>.
 {% endhint %}
 
+{% hint style="warning" %}
+Do **NOT** use this class with multiple threads. If you absolutely have to, you need to use [lock statements](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/lock) to avoid exceptions being thrown.
+{% endhint %}
+
 #### Exceptions
 
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
@@ -104,6 +108,10 @@ Error marking memory as read-only.
 [InvalidOperationException](https://learn.microsoft.com/en-us/dotnet/api/system.invalidoperationexception)
 
 Error marking memory as readable and writable.
+
+[InvalidOperationException](https://learn.microsoft.com/en-us/dotnet/api/system.invalidoperationexception)
+
+Methods cannot be called from multiple threads simultaneously.
 
 [ObjectDisposedException](https://learn.microsoft.com/en-us/dotnet/api/system.objectdisposedexception)
 
