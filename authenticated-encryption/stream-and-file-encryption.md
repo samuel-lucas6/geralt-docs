@@ -32,6 +32,10 @@ using var secretstream = new IncrementalXChaCha20Poly1305(Span<byte> header, Rea
 
 `key` has a length not equal to `KeySize`.
 
+[InvalidOperationException](https://learn.microsoft.com/en-us/dotnet/api/system.invalidoperationexception)
+
+Methods cannot be called from multiple threads simultaneously.
+
 [CryptographicException](https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.cryptographicexception)
 
 Error initializing stream encryption/decryption.
@@ -73,6 +77,10 @@ secretstream.EncryptChunk(Span<byte> ciphertextChunk, ReadOnlySpan<byte> plainte
 
 Cannot encrypt on a decryption stream or after the final chunk without reinitializing.
 
+[InvalidOperationException](https://learn.microsoft.com/en-us/dotnet/api/system.invalidoperationexception)
+
+Methods cannot be called from multiple threads simultaneously.
+
 [ObjectDisposedException](https://learn.microsoft.com/en-us/dotnet/api/system.objectdisposedexception)
 
 The object has been disposed.
@@ -105,6 +113,10 @@ var chunkFlag = secretstream.DecryptChunk(Span<byte> plaintextChunk, ReadOnlySpa
 
 Cannot decrypt on an encryption stream or after the final chunk without reinitializing.
 
+[InvalidOperationException](https://learn.microsoft.com/en-us/dotnet/api/system.invalidoperationexception)
+
+Methods cannot be called from multiple threads simultaneously.
+
 [ObjectDisposedException](https://learn.microsoft.com/en-us/dotnet/api/system.objectdisposedexception)
 
 The object has been disposed.
@@ -127,6 +139,10 @@ secretstream.Rekey()
 
 Cannot rekey after the final chunk without reinitializing.
 
+[InvalidOperationException](https://learn.microsoft.com/en-us/dotnet/api/system.invalidoperationexception)
+
+Methods cannot be called from multiple threads simultaneously.
+
 [ObjectDisposedException](https://learn.microsoft.com/en-us/dotnet/api/system.objectdisposedexception)
 
 The object has been disposed.
@@ -148,6 +164,10 @@ secretstream.Reinitialize(Span<byte> header, ReadOnlySpan<byte> key, bool encryp
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
 `key` has a length not equal to `KeySize`.
+
+[InvalidOperationException](https://learn.microsoft.com/en-us/dotnet/api/system.invalidoperationexception)
+
+Methods cannot be called from multiple threads simultaneously.
 
 [ObjectDisposedException](https://learn.microsoft.com/en-us/dotnet/api/system.objectdisposedexception)
 
@@ -175,6 +195,10 @@ If you intend to feed **multiple variable-length** inputs into the associated da
 
 {% hint style="danger" %}
 The key **MUST** be uniformly random. It can either be [randomly generated](../random-data.md#fill) or the output of a [KDF](../key-derivation.md). Furthermore, it **SHOULD** be rotated periodically (e.g., a different key per file).
+{% endhint %}
+
+{% hint style="warning" %}
+Do **NOT** use this class with multiple threads. If you absolutely have to, you need to use [lock statements](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/lock) to avoid exceptions being thrown.
 {% endhint %}
 
 {% hint style="warning" %}
