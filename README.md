@@ -80,4 +80,4 @@ I'd like to say a big thanks to:
 * [Trond Arne Bråthen](https://github.com/tabrath) for creating the [libsodium-core](https://github.com/ektrah/libsodium-core) library.​
 * [Adam Caudill](https://github.com/adamcaudill) and everyone who contributed to the [libsodium-net](https://web.archive.org/web/20221205225204/https://github.com/adamcaudill/libsodium-net) library.​
 * Everyone who has [contributed](https://github.com/samuel-lucas6/Geralt/graphs/contributors) to, used, or provided feedback about Geralt. In particular:
-  * [Alexey Avramov](https://github.com/hakavlad) for providing AI code audits of Geralt v4.0.1 in [#21](https://github.com/samuel-lucas6/Geralt/discussions/21), which identified several Informational-Medium issues that were addressed in [v4.1.0](https://github.com/samuel-lucas6/Geralt/releases/tag/v4.1.0).
+  * [Alexey Avramov](https://github.com/hakavlad) for providing AI code audits of Geralt v4.0.1 and v4.1.0, which identified several Informational-Medium issues that were addressed in the [next](https://github.com/samuel-lucas6/Geralt/releases/tag/v4.1.0) [release](https://github.com/samuel-lucas6/Geralt/releases/tag/v4.2.0).
