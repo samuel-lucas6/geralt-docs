@@ -65,6 +65,10 @@ secretstream.EncryptChunk(Span<byte> ciphertextChunk, ReadOnlySpan<byte> plainte
 
 `ciphertextChunk` has a length not equal to `plaintextChunk.Length + TagSize`.
 
+[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
+
+`chunkFlag` must be a value within the enum.
+
 [InvalidOperationException](https://learn.microsoft.com/en-us/dotnet/api/system.invalidoperationexception)
 
 Cannot encrypt on a decryption stream or after the final chunk without reinitializing.
