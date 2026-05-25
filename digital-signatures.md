@@ -172,6 +172,10 @@ ed25519ph.Finalize(Span<byte> signature, ReadOnlySpan<byte> privateKey);
 ```
 
 {% hint style="warning" %}
+Do **NOT** use this class with multiple threads. If you absolutely have to, you need to use [lock statements](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/lock) to avoid exceptions being thrown.
+{% endhint %}
+
+{% hint style="warning" %}
 This should **only** be used when the message is too large to fit into memory because prehashing is [theoretically weaker](https://cryptologie.net/article/497/eddsa-ed25519-ed25519-ietf-ed25519ph-ed25519ctx-hasheddsa-pureeddsa-wtf/) than regular signing.
 {% endhint %}
 
@@ -196,6 +200,10 @@ The signature could not be computed.
 [InvalidOperationException](https://learn.microsoft.com/en-us/dotnet/api/system.invalidoperationexception)
 
 Cannot update after finalizing or finalize twice (without reinitializing).
+
+[InvalidOperationException](https://learn.microsoft.com/en-us/dotnet/api/system.invalidoperationexception)
+
+Methods cannot be called from multiple threads simultaneously.
 
 [ObjectDisposedException](https://learn.microsoft.com/en-us/dotnet/api/system.objectdisposedexception)
 
