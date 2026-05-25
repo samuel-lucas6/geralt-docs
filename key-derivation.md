@@ -78,6 +78,10 @@ blake2b.Finalize(Span<byte> outputKeyingMaterial3);
 `CacheState()` can only cache the state once. Each subsequent call will overwrite the previously cached state. See the [Notes](key-derivation.md#notes) for when this method should be used.
 {% endhint %}
 
+{% hint style="warning" %}
+Do **NOT** use this class with multiple threads. If you absolutely have to, you need to use [lock statements](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/lock) to avoid exceptions being thrown.
+{% endhint %}
+
 #### Exceptions
 
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
@@ -115,6 +119,10 @@ Cannot cache the state after finalizing (without reinitializing).
 [InvalidOperationException](https://learn.microsoft.com/en-us/dotnet/api/system.invalidoperationexception)
 
 Cannot restore the state when it has not been cached.
+
+[InvalidOperationException](https://learn.microsoft.com/en-us/dotnet/api/system.invalidoperationexception)
+
+Methods cannot be called from multiple threads simultaneously.
 
 [ObjectDisposedException](https://learn.microsoft.com/en-us/dotnet/api/system.objectdisposedexception)
 
