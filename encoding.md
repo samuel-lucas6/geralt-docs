@@ -116,6 +116,10 @@ Encodings.GetToBase64BufferSize(ReadOnlySpan<byte> data, Base64Variant variant =
 
 `data` has a length of 0.
 
+[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
+
+`variant` must be a value within the enum.
+
 [OverflowException](https://learn.microsoft.com/en-us/dotnet/api/system.overflowexception)
 
 The encoded length is too large for an array.
@@ -138,6 +142,10 @@ Encodings.ToBase64(Span<char> base64, ReadOnlySpan<byte> data, Base64Variant var
 
 `data` has a length of 0.
 
+[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
+
+`variant` must be a value within the enum.
+
 [CryptographicException](https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.cryptographicexception)
 
 Error converting bytes to Base64.
@@ -155,6 +163,10 @@ Encodings.GetFromBase64BufferSize(ReadOnlySpan<char> base64, Base64Variant varia
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
 `base64` has a length of 0 or is not a valid length based on `variant`.
+
+[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
+
+`variant` must be a value within the enum.
 
 [ArgumentException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentexception)
 
@@ -185,6 +197,10 @@ Encodings.FromBase64(Span<byte> data, ReadOnlySpan<char> base64, Base64Variant v
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
 `base64` has a length of 0 or is not a valid length based on `variant`.
+
+[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
+
+`variant` must be a value within the enum.
 
 [ArgumentException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentexception)
 
