@@ -67,9 +67,9 @@ Argon2id.ComputeHash(Span<char> hash, ReadOnlySpan<byte> password, int iteration
 ```
 
 {% hint style="success" %}
-`hash` must be a fixed length due to libsodium's API, which pads the potentially variable-length output with null characters.
+`hash` must be a fixed length due to libsodium's API, which pads the potentially variable-length output with null characters (`'\0'`).
 
-You can convert the hash into a string for storage in a database using [Span\<T>.ToString()](https://learn.microsoft.com/en-us/dotnet/api/system.span-1.tostring). Any null characters at the end can either be left alone or removed. Only this hash needs to be stored as the cost parameters and salt are encoded.
+You can convert the hash into a string for storage in a database using [Span\<T>.ToString()](https://learn.microsoft.com/en-us/dotnet/api/system.span-1.tostring). Any null characters at the end can either be left alone or removed with [String.TrimEnd()](https://learn.microsoft.com/en-us/dotnet/api/system.string.trimend). Only this hash needs to be stored as the cost parameters and salt are encoded.
 {% endhint %}
 
 #### Exceptions
