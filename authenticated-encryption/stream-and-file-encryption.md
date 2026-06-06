@@ -36,6 +36,10 @@ using var secretstream = new IncrementalXChaCha20Poly1305(Span<byte> header, Rea
 
 Methods cannot be called from multiple threads simultaneously.
 
+[OutOfMemoryException](https://learn.microsoft.com/en-us/dotnet/api/system.outofmemoryexception)
+
+Allocating memory for the state failed.
+
 [CryptographicException](https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.cryptographicexception)
 
 Error initializing stream encryption/decryption.
@@ -172,6 +176,10 @@ Methods cannot be called from multiple threads simultaneously.
 [ObjectDisposedException](https://learn.microsoft.com/en-us/dotnet/api/system.objectdisposedexception)
 
 The object has been disposed.
+
+[OutOfMemoryException](https://learn.microsoft.com/en-us/dotnet/api/system.outofmemoryexception)
+
+Allocating memory for the state failed.
 
 [CryptographicException](https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.cryptographicexception)
 
