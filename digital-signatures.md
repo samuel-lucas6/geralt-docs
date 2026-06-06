@@ -193,6 +193,10 @@ This should **only** be used when the message is too large to fit into memory be
 
 `publicKey` has a length not equal to `PublicKeySize`.
 
+[OutOfMemoryException](https://learn.microsoft.com/en-us/dotnet/api/system.outofmemoryexception)
+
+Allocating memory for the state failed.
+
 [CryptographicException](https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.cryptographicexception)
 
 The signature could not be computed.
