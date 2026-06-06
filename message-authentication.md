@@ -109,6 +109,10 @@ Do **NOT** use this class with multiple threads. If you absolutely have to, you 
 
 `hash` has a length not equal to `hashSize`.
 
+[OutOfMemoryException](https://learn.microsoft.com/en-us/dotnet/api/system.outofmemoryexception)
+
+Allocating memory for the state failed.
+
 [CryptographicException](https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.cryptographicexception)
 
 The tag could not be computed.
