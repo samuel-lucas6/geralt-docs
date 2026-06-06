@@ -194,6 +194,8 @@ More memory is better than more iterations. However, you will need to increase t
 
 {% hint style="warning" %}
 Too high of an iteration count/memory size on a server could lead to denial-of-service (DoS) attacks. You can do client-side password hashing as well as server-side password hashing to help, sometimes called [server relief](https://doc.libsodium.org/password_hashing#server-relief).
+
+If an attacker can manipulate password hash strings, that also allows DoS because the iteration count/memory size are embedded in the string. Preventing access/tampering or validating against an upper parameter limit can mitigate this.
 {% endhint %}
 
 {% hint style="info" %}
