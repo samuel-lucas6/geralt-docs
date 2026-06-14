@@ -127,7 +127,7 @@ Cannot cache the state after finalizing (without reinitializing).
 
 [InvalidOperationException](https://learn.microsoft.com/en-us/dotnet/api/system.invalidoperationexception)
 
-Cannot restore the state when it has not been cached.
+Cannot restore the state when it has not been cached or when the current hash size differs from what was cached.
 
 [InvalidOperationException](https://learn.microsoft.com/en-us/dotnet/api/system.invalidoperationexception)
 
