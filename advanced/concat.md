@@ -37,6 +37,10 @@ Spans.Concat(Span<byte> buffer, ReadOnlySpan<byte> a, ReadOnlySpan<byte> b)
 
 `a.Length + b.Length` has resulted in an overflow.
 
+[ArgumentException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentexception)
+
+`buffer` cannot overlap with the spans being copied.
+
 ### Concat
 
 Fills a span with the concatenation of three spans.
@@ -54,6 +58,10 @@ Spans.Concat(Span<byte> buffer, ReadOnlySpan<byte> a, ReadOnlySpan<byte> b, Read
 [OverflowException](https://learn.microsoft.com/en-us/dotnet/api/system.overflowexception)
 
 `a.Length + b.Length + c.Length` has resulted in an overflow.
+
+[ArgumentException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentexception)
+
+`buffer` cannot overlap with the spans being copied.
 
 ### Concat
 
@@ -73,6 +81,10 @@ Spans.Concat(Span<byte> buffer, ReadOnlySpan<byte> a, ReadOnlySpan<byte> b, Read
 
 `a.Length + b.Length + c.Length + d.Length` has resulted in an overflow.
 
+[ArgumentException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentexception)
+
+`buffer` cannot overlap with the spans being copied.
+
 ### Concat
 
 Fills a span with the concatenation of five spans.
@@ -91,6 +103,10 @@ Spans.Concat(Span<byte> buffer, ReadOnlySpan<byte> a, ReadOnlySpan<byte> b, Read
 
 `a.Length + b.Length + c.Length + d.Length + e.Length` has resulted in an overflow.
 
+[ArgumentException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentexception)
+
+`buffer` cannot overlap with the spans being copied.
+
 ### Concat
 
 Fills a span with the concatenation of six spans.
@@ -108,6 +124,10 @@ Spans.Concat(Span<byte> buffer, ReadOnlySpan<byte> a, ReadOnlySpan<byte> b, Read
 [OverflowException](https://learn.microsoft.com/en-us/dotnet/api/system.overflowexception)
 
 `a.Length + b.Length + c.Length + d.Length + e.Length + f.Length` has resulted in an overflow.
+
+[ArgumentException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentexception)
+
+`buffer` cannot overlap with the spans being copied.
 
 ## Notes
 
