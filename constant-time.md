@@ -130,7 +130,9 @@ bool allZeros = ConstantTime.IsAllZeros(ReadOnlySpan<byte> buffer);
 
 #### Exceptions
 
-N/A
+[ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
+
+`buffer.Length` is equal to 0.
 
 ## Notes
 
