@@ -16,6 +16,8 @@
   * [AEGIS-256](authenticated-encryption/aegis-256.md)
   * [ChaCha20-Poly1305](authenticated-encryption/chacha20-poly1305.md)
   * [XChaCha20-Poly1305](authenticated-encryption/xchacha20-poly1305.md)
+* [Key encapsulation mechanisms](key-encapsulation-mechanisms/README.md)
+  * [X-Wing](key-encapsulation-mechanisms/x-wing.md)
 * [Key exchange](key-exchange.md)
 * [Digital signatures](digital-signatures.md)
 * [Advanced](advanced/README.md)
