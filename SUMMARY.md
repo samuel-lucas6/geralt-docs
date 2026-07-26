@@ -18,6 +18,7 @@
   * [XChaCha20-Poly1305](authenticated-encryption/xchacha20-poly1305.md)
 * [Key encapsulation mechanisms](key-encapsulation-mechanisms/README.md)
   * [X-Wing](key-encapsulation-mechanisms/x-wing.md)
+  * [ML-KEM-768](key-encapsulation-mechanisms/ml-kem-768.md)
 * [Key exchange](key-exchange.md)
 * [Digital signatures](digital-signatures.md)
 * [Advanced](advanced/README.md)
