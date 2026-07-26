@@ -6,7 +6,11 @@ It is generally difficult to share a symmetric key with another party because it
 
 Both parties can then compute the same shared secret using their private key and the other party's public key. This shared secret can be turned into a symmetric key (e.g., for [encryption](authenticated-encryption/xchacha20-poly1305.md)).
 
+{% hint style="success" %}
 For [post-quantum security](https://www.bsi.bund.de/SharedDocs/Downloads/EN/BSI/Publications/Brochure/quantum-safe-cryptography.html?nn=433196), a pre-shared key can also be shared between the two parties via a **secure** (e.g., **encrypted**) channel.
+
+Alternatively, a post-quantum or hybrid KEM can be used, like [X-Wing](key-encapsulation-mechanisms/x-wing.md). However, the KEM interface means such algorithms cannot be used in all scenarios (e.g., [non-interactive](key-exchange.md#non-interactive-patterns) key exchanges).
+{% endhint %}
 
 {% hint style="danger" %}
 Private keys **MUST** **NOT** be shared. They **MUST** remain secret.
