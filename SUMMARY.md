@@ -24,6 +24,7 @@
   * [ChaCha20](advanced/chacha20.md)
   * [XChaCha20](advanced/xchacha20.md)
   * [HChaCha20](advanced/hchacha20.md)
+  * [Keccak-f\[1600\]](advanced/keccak-f-1600.md)
   * [Poly1305](advanced/poly1305.md)
   * [Ed25519 to X25519](advanced/ed25519-to-x25519.md)
 * [Getting libsodium to work on Windows](getting-libsodium-to-work-on-windows.md)
