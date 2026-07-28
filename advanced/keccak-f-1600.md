@@ -19,9 +19,11 @@ Provides access to the Keccak-f\[1600] permutation. Setting the state to all-zer
 The entire state can be accessed, permuting the state is a separate function, and there's no concept of finalization. This enables flexibility for different custom constructions.
 
 {% hint style="danger" %}
-You **MUST** define a secure rate/capacity size (e.g., for hashing, the minimum should be a 256-bit capacity).
+You **MUST** define a secure rate/capacity size. The minimum capacity should be 256 bits for unkeyed hashing/collision resistance scenarios but can be reduced to 192 bits for keyed scenarios (if you don't care about [collision resistance](https://tosc.iacr.org/index.php/ToSC/article/view/11295)). This is because the attacker has less control in keyed modes.
 
-Also, you **MUST** implement proper padding (e.g., pad10\*1) and domain separation.
+Also, you **MUST** implement proper padding (e.g., [pad10\*1](https://keccak.team/keccak_bits_and_bytes.html) or [pad10\*](https://ascon.isec.tugraz.at/specification.html)) and domain separation (e.g., [XORing a constant](https://competitions.cr.yp.to/round3/norxv30.pdf) after absorbing associated data before absorbing plaintext).
+
+It is possible to do [full-state](https://eprint.iacr.org/2025/2038) [keyed](https://eprint.iacr.org/2023/1520) absorbing/squeezing, but this is not recommended because it's [brittle](https://eprint.iacr.org/2023/1525).
 {% endhint %}
 
 ```csharp
