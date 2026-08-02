@@ -4,15 +4,17 @@
 
 When communicating with another party, you often need a way to establish a shared secret (symmetric) key without having an existing secure channel. An algorithm that allows this over a public (insecure) channel is called a key-establishment scheme.
 
-Key encapsulation mechanisms (KEMs) are one type of key-establishment scheme, and they're the design of choice for **post-quantum algorithms**. Unlike a [traditional key exchange](../key-exchange.md), the sender's key pair isn't involved, a ciphertext needs to be sent to the recipient, and the shared secret is uniformly random. From the sending side, the algorithm is randomised rather than deterministic.
+Key encapsulation mechanisms (KEMs) are one type of key-establishment scheme, and they're the interface of choice for **post-quantum algorithms**, which protect against cryptographically relevant quantum computers (CRQCs). Even though CRQCs don't currently exist, an adversary can capture encrypted data that relies on [traditional key exchange](../key-exchange.md) algorithms ready for decryption when such a CRQC becomes available (a [store now, decrypt later attack](https://en.wikipedia.org/wiki/Harvest_now%2C_decrypt_later)).
 
-Here is how it works when doing one trip of communication:
+Unlike a traditional key exchange, the sender's key pair isn't involved, a ciphertext needs to be sent to the recipient, and the shared secret is uniformly random. From the sending side, the algorithm is randomised rather than deterministic.
 
-1. **Key generation**: Alice generates a key pair.
-2. **Encapsulation**: Bob uses Alice's public key to generate a shared secret and an associated ciphertext. This ciphertext is sent to Alice.
-3. **Decapsulation**: Alice uses the ciphertext and her private key to compute the same shared secret.
+Here is how it works when doing one trip of communication (real protocols often do multiple trips):
 
-[ML-KEM-768](https://csrc.nist.gov/pubs/fips/203/final) is the middle (192-bit) security strength variant of ML-KEM, which is one of the algorithms standardised by [NIST](https://csrc.nist.gov/Projects/post-quantum-cryptography/post-quantum-cryptography-standardization/selected-algorithms) as part of the Post-Quantum Cryptography (PQC) Standardization (competition) process. This variant provides protection against cryptanalysis advancements compared to ML-KEM-512 whilst being [lighter](https://pqshield.github.io/nist-sigs-zoo/kems/?s=ML-KEM) than ML-KEM-1024.
+1. **Key generation**: the recipient generates a key pair and shares the public key with the sender.
+2. **Encapsulation**: the sender uses the recipient's public key to generate a shared secret and an associated ciphertext. This ciphertext is sent to the recipient.
+3. **Decapsulation**: the recipient uses the ciphertext and their private key to compute the same shared secret.
+
+[ML-KEM-768](https://csrc.nist.gov/pubs/fips/203/final) is the middle (192-bit) security strength variant of ML-KEM, which is one of the algorithms standardised by [NIST](https://csrc.nist.gov/Projects/post-quantum-cryptography/post-quantum-cryptography-standardization/selected-algorithms) as part of the Post-Quantum Cryptography (PQC) Standardization (competition) process. This variant provides protection against cryptanalysis advancements compared to ML-KEM-512 whilst being [lighter](https://pqshield.github.io/nist-sigs-zoo/kems/?s=ML-KEM) (smaller parameters/marginally faster) than ML-KEM-1024.
 
 {% hint style="danger" %}
 Private keys **MUST** **NOT** be shared. They **MUST** remain secret.
