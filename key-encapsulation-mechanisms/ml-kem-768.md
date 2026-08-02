@@ -14,7 +14,7 @@ Here is how it works when doing one trip of communication (real protocols often 
 2. **Encapsulation**: the sender uses the recipient's public key to generate a shared secret and an associated ciphertext. This ciphertext is sent to the recipient.
 3. **Decapsulation**: the recipient uses the ciphertext and their private key to compute the same shared secret.
 
-[ML-KEM-768](https://csrc.nist.gov/pubs/fips/203/final) is the middle (192-bit) security strength variant of ML-KEM, which is one of the algorithms standardised by [NIST](https://csrc.nist.gov/Projects/post-quantum-cryptography/post-quantum-cryptography-standardization/selected-algorithms) as part of the Post-Quantum Cryptography (PQC) Standardization (competition) process. This variant provides protection against cryptanalysis advancements compared to ML-KEM-512 whilst being [lighter](https://pqshield.github.io/nist-sigs-zoo/kems/?s=ML-KEM) (smaller parameters/marginally faster) than ML-KEM-1024.
+[ML-KEM-768](https://csrc.nist.gov/pubs/fips/203/final) is the middle (192-bit) security strength variant of ML-KEM, which is one of the algorithms standardised by [NIST](https://csrc.nist.gov/Projects/post-quantum-cryptography/post-quantum-cryptography-standardization/selected-algorithms) as part of the Post-Quantum Cryptography (PQC) Standardization (competition) process. This variant provides protection against cryptanalysis advancements compared to ML-KEM-512 whilst being [lighter](https://pqshield.github.io/nist-sigs-zoo/kems/?s=ML-KEM) (smaller parameters/marginally faster) than ML-KEM-1024. All variants are [faster](https://pqshield.github.io/nist-sigs-zoo/kems/?s=ML-KEM%2CECDH) than traditional key exchange algorithms (e.g., X25519) but have larger parameters.
 
 {% hint style="danger" %}
 Private keys **MUST** **NOT** be shared. They **MUST** remain secret.
@@ -151,3 +151,4 @@ Not all uses of traditional key exchange can be replaced in a straightforward ma
 {% hint style="info" %}
 If you [read](https://csrc.nist.gov/pubs/sp/800/227/final) about post-quantum algorithms, you may see the terms 'encapsulation key' and 'decapsulation key'. These mean 'public key' and 'private key' but are specific to KEMs.
 {% endhint %}
+
