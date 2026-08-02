@@ -4,7 +4,7 @@
 
 When communicating with another party, you often need a way to establish a shared secret (symmetric) key without having an existing secure channel. An algorithm that allows this over a public (insecure) channel is called a key-establishment scheme.
 
-Key encapsulation mechanisms (KEMs) are one type of key-establishment scheme, and they're the interface of choice for **post-quantum algorithms**, which protect against cryptographically relevant quantum computers (CRQCs). Even though CRQCs don't currently exist, an adversary can capture encrypted data that relies on [traditional key exchange](../key-exchange.md) algorithms ready for decryption when such a CRQC becomes available (a [store now, decrypt later attack](https://en.wikipedia.org/wiki/Harvest_now%2C_decrypt_later)).
+Key encapsulation mechanisms (KEMs) are one type of key-establishment scheme, and they're the interface of choice for **post-quantum algorithms**, which protect against cryptographically relevant quantum computers (CRQCs). Even without a CRQC today, an adversary can capture encrypted data that relies on [traditional key-establishment algorithms](../key-exchange.md) ready for decryption when such a CRQC becomes available (a [store now, decrypt later attack](https://en.wikipedia.org/wiki/Harvest_now%2C_decrypt_later)).
 
 Unlike a traditional key exchange, the sender's key pair isn't involved, a ciphertext needs to be sent to the recipient, and the shared secret is uniformly random. From the sending side, the algorithm is randomised rather than deterministic.
 
@@ -17,7 +17,7 @@ Here is how it works when doing one trip of communication (real protocols often 
 [ML-KEM-768](https://csrc.nist.gov/pubs/fips/203/final) is the middle (192-bit) security strength variant of ML-KEM, which is one of the algorithms standardised by [NIST](https://csrc.nist.gov/Projects/post-quantum-cryptography/post-quantum-cryptography-standardization/selected-algorithms) as part of the Post-Quantum Cryptography (PQC) Standardization (competition) process. This variant provides protection against cryptanalysis advancements compared to ML-KEM-512 whilst being [lighter](https://pqshield.github.io/nist-sigs-zoo/kems/?s=ML-KEM) (smaller parameters/marginally faster) than ML-KEM-1024. All variants are [faster](https://pqshield.github.io/nist-sigs-zoo/kems/?s=ML-KEM%2CECDH) than traditional key exchange algorithms (e.g., X25519) but have larger parameters.
 
 {% hint style="danger" %}
-Private keys **MUST** **NOT** be shared. They **MUST** remain secret.
+Private keys **MUST** **NOT** be shared. They **MUST** remain secret and be protected from modification.
 {% endhint %}
 
 {% hint style="success" %}
@@ -140,18 +140,44 @@ public const int CiphertextSize = 1088;
 
 ## Notes
 
-{% hint style="warning" %}
-Not all uses of traditional key exchange can be replaced in a straightforward manner by KEMs. For example, KEMs don't provide non-interactive key exchange (NIKE) functionality.
+{% hint style="danger" %}
+A KEM does **NOT** provide authentication of either party. It's important to verify that any public keys and ciphertexts came from who you expect, which is typically done via [digital signatures](../digital-signatures.md).
+{% endhint %}
+
+{% hint style="danger" %}
+One would expect that different ciphertexts/public keys produce different shared secrets. However, an adversary that can control a **private key** can cause the [same shared secret](https://eprint.iacr.org/2024/523) to be generated.
+
+Technically, only protocols where the private key cannot be fully trusted (e.g., it's received from a third party or sometimes revealed) are at risk. **However, it's best practice to hash ciphertexts/public keys alongside shared secrets during key derivation**, which mitigates this.
+
+Alternatively, one can store a random 256-bit seed as the private key and use a KDF to expand it to 512 bits for ML-KEM seeded key generation to derive the large private key, as done in [X-Wing](x-wing.md). This prevents a malformed private key because the attacker can't control the key derivation.
 {% endhint %}
 
 {% hint style="warning" %}
-[ML-KEM](https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-kemeleon) public keys and ciphertexts are distinguishable from random (e.g., someone can tell that cryptography is being used). Therefore, it's not suitable for scenarios like plausible deniability and censorship-resistance without using a scheme such as [Kemeleon](https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-kemeleon), which is not implemented in libsodium.
+Not all uses of traditional key exchange can be replaced in a straightforward manner by KEMs. For example, KEMs don't provide [non-interactive key exchange (NIKE)](https://eprint.iacr.org/2023/271) functionality (where both users can compute the shared secret without interaction if they know each other's public key).
+
+KEMs are inherently synchronous and interactive because of the ciphertext. This [prevents](https://eprint.iacr.org/2022/539) non-interactive authentication via static public keys, which avoids digital signatures. In an offline context, the best you can do is encapsulate to the recipient's static public key (no sender keys can be involved because that would require an interactive protocol).
+{% endhint %}
+
+{% hint style="warning" %}
+ML-KEM public keys and ciphertexts are [distinguishable from random](https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-kemeleon) (e.g., someone can tell that cryptography is being used). Therefore, it's not suitable for protocols requiring plausible deniability or censorship-resistance without using a scheme such as [Kemeleon](https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-kemeleon), which is not implemented in libsodium.
+{% endhint %}
+
+{% hint style="success" %}
+Static (long-term) as well as ephemeral public keys can be used safely. Ephemeral public keys help provide [forward secrecy](https://en.wikipedia.org/wiki/Forward_secrecy), which protects prior communications in the event of a key compromise.
 {% endhint %}
 
 {% hint style="success" %}
 ML-KEM has a [tiny](https://csrc.nist.gov/pubs/fips/203/final) probability of decapsulation failure. Even if everything is done honestly/correctly, both parties may not derive the same shared secret.
 
 However, practically speaking, this will [never happen](https://datatracker.ietf.org/doc/html/draft-sfluhrer-cfrg-ml-kem-security-considerations). In other words, this isn't something to worry about.
+{% endhint %}
+
+{% hint style="success" %}
+If an attacker substitutes a public key or modifies/replaces a ciphertext, the derived shared secret will be different between the two parties, which will cause an error in any properly designed protocol.
+{% endhint %}
+
+{% hint style="info" %}
+Whilst the shared secret is 256 bits long, its security strength is actually 192 bits due to the security level of ML-KEM-768.
 {% endhint %}
 
 {% hint style="info" %}
