@@ -148,7 +148,12 @@ Not all uses of traditional key exchange can be replaced in a straightforward ma
 [ML-KEM](https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-kemeleon) public keys and ciphertexts are distinguishable from random (e.g., someone can tell that cryptography is being used). Therefore, it's not suitable for scenarios like plausible deniability and censorship-resistance without using a scheme such as [Kemeleon](https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-kemeleon), which is not implemented in libsodium.
 {% endhint %}
 
+{% hint style="success" %}
+ML-KEM has a [tiny](https://csrc.nist.gov/pubs/fips/203/final) probability of decapsulation failure. Even if everything is done honestly/correctly, both parties may not derive the same shared secret.
+
+However, practically speaking, this will [never happen](https://datatracker.ietf.org/doc/html/draft-sfluhrer-cfrg-ml-kem-security-considerations). In other words, this isn't something to worry about.
+{% endhint %}
+
 {% hint style="info" %}
 If you [read](https://csrc.nist.gov/pubs/sp/800/227/final) about post-quantum algorithms, you may see the terms 'encapsulation key' and 'decapsulation key'. These mean 'public key' and 'private key' but are specific to KEMs.
 {% endhint %}
-
