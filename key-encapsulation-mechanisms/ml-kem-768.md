@@ -177,6 +177,10 @@ If an attacker substitutes a public key or modifies/replaces a ciphertext, the d
 {% endhint %}
 
 {% hint style="info" %}
+Encapsulation can error due to a check that the integers encoded in the public key are in the valid range. This sort of check is not performed for decapsulation.
+{% endhint %}
+
+{% hint style="info" %}
 Whilst the shared secret is 256 bits long, its security strength is actually 192 bits due to the security level of ML-KEM-768.
 {% endhint %}
 
