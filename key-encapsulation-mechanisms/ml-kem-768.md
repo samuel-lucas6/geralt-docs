@@ -22,6 +22,8 @@ Private keys **MUST** **NOT** be shared. They **MUST** remain secret and be prot
 
 {% hint style="success" %}
 Consider using [X-Wing](x-wing.md) instead, which uses X25519 + ML-KEM-768 to provide [classical security still](https://soatok.blog/2022/01/27/the-controversy-surrounding-hybrid-cryptography/) if ML-KEM-768 is unexpectedly broken. Whilst this is [arguably unnecessary](https://soatok.blog/2026/04/13/hybrid-constructions-the-post-quantum-safety-blanket/) and has [some drawbacks](https://www.ncsc.gov.uk/paper/next-steps-in-preparing-for-post-quantum-cryptography#section_5), it is a [popular/recommended approach](https://crypto.stackexchange.com/q/119797).
+
+However, X-Wing isn't suitable in all cases, like when doing protocols requiring plausible deniability or censorship-resistance. In such cases, one may need to create their own hybrid KEM.
 {% endhint %}
 
 ## Usage
