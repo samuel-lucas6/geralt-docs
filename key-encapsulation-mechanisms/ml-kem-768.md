@@ -6,7 +6,7 @@ When communicating with another party, you often need a way to establish a share
 
 Key encapsulation mechanisms (KEMs) are one type of key-establishment scheme, and they're the interface of choice for **post-quantum algorithms**, which protect against cryptographically relevant quantum computers (CRQCs). Even without a CRQC today, an adversary can capture encrypted data that relies on [traditional key-establishment algorithms](../key-exchange.md) ready for decryption when such a CRQC becomes available (a [store now, decrypt later attack](https://en.wikipedia.org/wiki/Harvest_now%2C_decrypt_later)).
 
-Unlike a traditional key exchange, the sender's key pair isn't involved, a ciphertext needs to be sent to the recipient, and the shared secret is uniformly random. From the sending side, the algorithm is randomised rather than deterministic.
+Unlike a traditional key exchange, the sender's key pair isn't involved, a ciphertext needs to be sent to the recipient, and the shared secret is uniformly random. From the sending side, the algorithm is randomised rather than deterministic (the sender doesn't choose the shared secret).
 
 Here is how it works when doing one trip of communication (real protocols often do multiple trips):
 
