@@ -164,6 +164,15 @@ KEMs are inherently synchronous and interactive because of the ciphertext. This 
 ML-KEM public keys and ciphertexts are [distinguishable from random](https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-kemeleon) (e.g., someone can tell that cryptography is being used). Therefore, it's not suitable for protocols requiring plausible deniability or censorship-resistance without using a scheme such as [Kemeleon](https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-kemeleon), which is not implemented in libsodium.
 {% endhint %}
 
+{% hint style="warning" %}
+A collision-resistant [KDF](../key-derivation.md) should be used to derive keys from shared secrets. There are two main approaches here:
+
+1. For each KEM trip of communication, you can use the shared secret as the KDF key and the public key, ciphertext, and domain separation concatenated together as the message. Each derived key can then be concatenated together and fed to a KDF again to combine the keys and produce usable key material.
+2. For all KEM trips of communication, you can concatenate the shared secrets for use as the KDF key and concatenate all public keys, ciphertexts, and some domain separation for the message.
+
+There are multiple KDF designs, so the above may need to be adjusted. For example, [hashing](../hashing.md) (with a modern hash function) shared secrets concatenated together to derive a KDF key. Alternatively, using an [empty KDF key](https://eprint.iacr.org/2023/861) or [modern hash function](https://crypto.stackexchange.com/a/68047) and feeding everything in as the message (shared secrets first).
+{% endhint %}
+
 {% hint style="success" %}
 Static (long-term) as well as ephemeral public keys can be used safely. Ephemeral public keys help provide [forward secrecy](https://en.wikipedia.org/wiki/Forward_secrecy), which protects prior communications in the event of a key compromise.
 {% endhint %}
