@@ -202,3 +202,17 @@ Whilst the shared secret is 256 bits long, its security strength is actually 192
 {% hint style="info" %}
 If you [read](https://csrc.nist.gov/pubs/sp/800/227/final) about post-quantum algorithms, you may see the terms 'encapsulation key' and 'decapsulation key'. These mean 'public key' and 'private key' but are specific to KEMs.
 {% endhint %}
+
+### Non-Interactive Pattern <a href="#non-interactive-patterns" id="non-interactive-patterns"></a>
+
+This is a one-way pattern, so no back and forth between the sender and recipient is required. It's appropriate for offline applications (e.g., a file encryption program).
+
+The recipient does not know who sent the message, and only the recipient can decrypt the message once the shared secret is erased from memory. This is the [post-quantum equivalent](https://eprint.iacr.org/2022/539) of the [N pattern](https://noiseprotocol.org/noise.html#one-way-handshake-patterns). The security properties are discussed [here](https://noiseexplorer.com/patterns/N/).
+
+{% hint style="warning" %}
+It's not possible to get sender authentication in a non-interactive way using only KEMs. Therefore, this is the only non-interactive pattern.
+{% endhint %}
+
+1. The sender encapsulates to the recipient's static public key. They use the shared secret as input keying material to a KDF. The output keying material is used as the key to encrypt a message using an AEAD.
+2. The KEM ciphertext is sent alongside the AEAD ciphertext to the recipient.
+3. The recipient decapsulates using their static private key and the ciphertext from the sender. They use the shared secret to derive the same key and decrypt the AEAD ciphertext.
