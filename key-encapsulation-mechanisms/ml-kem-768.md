@@ -185,6 +185,8 @@ However, practically speaking, this will [never happen](https://datatracker.ietf
 
 {% hint style="success" %}
 If an attacker substitutes a public key or modifies/replaces a ciphertext, the derived shared secret will be different between the two parties, which will cause an error in any properly designed protocol.
+
+However, if an attacker can substitute the stored copy of the public key used for encapsulation (by the sender) and decapsulation (by the recipient), they can introduce a malicious public key. This isn't possible if the private key is stored securely and protected against modification (e.g., encrypted with an [AEAD scheme](../authenticated-encryption/)).
 {% endhint %}
 
 {% hint style="info" %}
