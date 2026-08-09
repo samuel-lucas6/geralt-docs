@@ -143,7 +143,9 @@ public const int CiphertextSize = 1088;
 ## Notes
 
 {% hint style="danger" %}
-A KEM does **NOT** provide authentication of either party. It's important to verify that any public keys and ciphertexts came from who you expect, which is typically done via [digital signatures](../digital-signatures.md). For example, a [certificate](https://csrc.nist.gov/pubs/sp/800/227/ipd) ties the identity of the key pair owner to the public key and proves that they possess the corresponding private key (via certificate authority checks).
+A KEM does **NOT** provide authentication of either party. It's important to verify that any public keys and ciphertexts came from who you expect, which is typically done via [digital signatures](../digital-signatures.md). For example, a [certificate](https://csrc.nist.gov/pubs/sp/800/227/final) ties the identity of the key pair owner to the static public key and proves that they possess the corresponding private key (via certificate authority checks).
+
+[Key confirmation](https://csrc.nist.gov/pubs/sp/800/227/final) can also be used for proof of possession of the private key corresponding to the public key, which works with static and ephemeral key pairs. Successful use of the shared secret when decrypting an [AEAD](../authenticated-encryption/) ciphertext is one form. Another is having one or both parties exchange and verify [MAC](../message-authentication.md) tags over data involved in the key establishment, which is more complicated.
 {% endhint %}
 
 {% hint style="danger" %}
