@@ -216,3 +216,16 @@ It's not possible to get sender authentication in a non-interactive way using on
 1. The sender encapsulates to the recipient's static public key. They use the shared secret as input keying material to a KDF. The output keying material is used as the key to encrypt a message using an AEAD.
 2. The KEM ciphertext is sent alongside the AEAD ciphertext to the recipient.
 3. The recipient decapsulates using their static private key and the ciphertext from the sender. They use the shared secret to derive the same key and decrypt the AEAD ciphertext.
+
+### Interactive Patterns <a href="#non-interactive-patterns" id="non-interactive-patterns"></a>
+
+These are two-way patterns, so back and forth between the sender and recipient is required. They are appropriate for online applications and can provide [better](https://noiseprotocol.org/noise.html#payload-security-properties) security properties than the one-way patterns.
+
+#### Bilateral Authenticated Key Establishment
+
+Both parties are authenticated using static KEM key pairs (e.g., associated with certificates, with each other's certificates exchanged and verified before the below). This achieves [weak forward secrecy](https://csrc.nist.gov/pubs/sp/800/227/final) due to ephemeral key pair involvement.
+
+1. The sender generates an ephemeral key pair. They then encapsulate to the recipient's static public key. They send the ephemeral public key and static KEM ciphertext to the recipient.
+2. The recipient encapsulates to the sender's static public key and encapsulates to the sender's ephemeral public key, sending both KEM ciphertexts to the sender. They also decapsulate the static KEM ciphertext from the sender.
+3. The sender decapsulates the static and ephemeral KEM ciphertexts from the recipient.
+4. Both parties now have three shared secrets - two static (each other) and one ephemeral (recipient to sender). These are combined using a KDF, with the output keying material used with an AEAD.
