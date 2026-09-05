@@ -1,6 +1,7 @@
 # Table of contents
 
 * [Introduction](README.md)
+* [Changelog](changelog.md)
 * [Random data](random-data.md)
 * [Constant time](constant-time.md)
 * [Secure memory](secure-memory.md)
