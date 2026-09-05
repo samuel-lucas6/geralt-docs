@@ -32,6 +32,8 @@ You can find the source code on [GitHub](https://github.com/samuel-lucas6/Geralt
 
 As of v3.3.0, this documentation is also [mirrored](https://github.com/samuel-lucas6/geralt-docs) to GitHub.
 
+Information about changes between versions can be found on the [Changelog](changelog.md) page.
+
 ## License
 
 Geralt is licensed under the [MIT](https://github.com/samuel-lucas6/Geralt/blob/main/LICENSE) license.
