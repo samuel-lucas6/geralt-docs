@@ -64,7 +64,7 @@ keccak.Reinitialize();
 
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
-`offset` is less than 0 or greater than `StateSize - 1`.
+`offset` is less than `MinOffset` or greater than `MaxOffset`.
 
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
@@ -84,6 +84,8 @@ These are used for validation and/or save you defining your own constants.
 
 ```csharp
 public const int StateSize = 200;
+public const int MinOffset = 0;
+public const int MaxOffset = StateSize - 1;
 ```
 
 ## Notes
