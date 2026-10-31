@@ -1,6 +1,6 @@
 # Introduction
 
-Geralt is a modern cryptographic library for [.NET 8+](https://dotnet.microsoft.com/en-us/download/dotnet) based on [libsodium](https://doc.libsodium.org/) and inspired by [Monocypher](https://monocypher.org/).
+Geralt is a modern cryptographic library for [.NET 10+](https://dotnet.microsoft.com/en-us/download/dotnet) based on [libsodium](https://doc.libsodium.org/) and inspired by [Monocypher](https://monocypher.org/).
 
 * **Simple**: an easy-to-learn API with descriptive naming. Only one algorithm for each task is provided when possible.
 * **Modern**: the latest and greatest cryptographic algorithms, such as X-Wing, ML-KEM-768, AEGIS-128L/AEGIS-256, (X)ChaCha20-Poly1305, BLAKE2b, Argon2id, X25519, and Ed25519.
