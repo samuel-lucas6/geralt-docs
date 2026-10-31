@@ -2,6 +2,22 @@
 
 This page is a backup and merged version of the [GitHub release notes](https://github.com/samuel-lucas6/Geralt/releases), which document all notable changes to this project. The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v4.5.0 - 2026-10-31
+
+#### Added
+
+* The Padmé padding scheme. The libsodium padding functions don't help you with calculating how much padding to add, which is important for length hiding scenarios. Padmé is a well known, generic scheme for doing this deterministically. This has pros/cons that will be explained in the documentation.
+* `IncrementalKeccakf1600.MinOffset`/`MaxOffset` constants for validation purposes.
+
+#### Changed
+
+* Updated the GitHub actions.
+* Updated the test packages.
+
+#### Removed
+
+* Support for .NET 8/9 because these are going [out of support](https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core).
+
 ## v4.4.0 - 2026-07-26
 
 #### Added
