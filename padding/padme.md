@@ -26,7 +26,7 @@ ulong paddedSize = Padme.GetPaddedSize(ulong unpaddedSize);
 
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
-`unpaddedSize` has a length greater than `MaxUnpaddedSize`.
+`unpaddedSize` is greater than `MaxUnpaddedSize`.
 
 [OverflowException](https://learn.microsoft.com/en-us/dotnet/api/system.overflowexception)
 
@@ -44,7 +44,7 @@ ulong paddingSize = Padme.GetPaddingSize(ulong unpaddedSize);
 
 [ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception)
 
-`unpaddedSize` has a length greater than `MaxUnpaddedSize`.
+`unpaddedSize` is greater than `MaxUnpaddedSize`.
 
 [OverflowException](https://learn.microsoft.com/en-us/dotnet/api/system.overflowexception)
 
