@@ -61,18 +61,24 @@ public const ulong MaxUnpaddedSize = 18302628885633695744;
 ## Notes
 
 {% hint style="warning" %}
+It is very difficult to hide that cryptography is being used. For example, even if padding is done appropriately and there are no readable headers, [X25519](../key-exchange.md) public keys are [distinguishable from random](https://elligator.org/). The same is true for post-quantum KEMs like [ML-KEM](https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-kemeleon).
+
+Additionally, metadata around how encrypted data is stored or transmitted can leak information. For instance, file names, directory structures, file timestamps, another protocol using readable headers, etc.
+{% endhint %}
+
+{% hint style="warning" %}
 Padmé has several limitations to be aware of:
 
 1. There is no padding for very small messages (lengths 0-8).
 2. There is minimal padding for small messages. For example, before 33, only two different inputs map to the same output. This gradually improves (4, 8, 16, etc inputs).
 3. The deterministic output lengths mean an adversary can potentially fingerprint that Padmé is being used, which helps distinguish a [padded uniform random blob (PURB)](https://en.wikipedia.org/wiki/PURB_\(cryptography\)) from random data. A different bucket also indicates a different message, which can be especially relevant at the boundary between two buckets.
-4. If you know the distribution of objects, it is likely that a dedicated padding function would perform better. Padmé was designed for unknown object sizes/as a safe default.
+4. If you know the distribution of objects, a dedicated padding function would likely perform better. Padmé was designed for unknown object sizes/as a safe default.
 
-To address these limitations, enforce a minimum length to feed Padmé and consider combining Padmé with randomised padding. However, the latter is easier said than done because a trivial design will mean enough observations can determine the Padmé length (the smallest observed length), which could potentially fingerprint Padmé again.
+To address these limitations, enforce a minimum length (e.g., 36, 72, or 144) to feed Padmé and consider combining Padmé with randomised padding. However, the latter is easier said than done because a trivial design will mean enough observations can determine the Padmé length (the smallest observed length), which could potentially fingerprint Padmé again.
 {% endhint %}
 
 {% hint style="info" %}
-The main argument for it being deterministic is that adversaries can cancel out randomised padding with repeated observations to reveal the actual length, which is especially problematic in networking style scenarios. It also leads to a simple design with predictable overhead.
+The main argument for it being deterministic is that adversaries can cancel out randomised padding with repeated observations to reveal the actual length, which is especially problematic in networking-style scenarios. It also leads to a simple design with predictable overhead.
 {% endhint %}
 
 {% hint style="success" %}
